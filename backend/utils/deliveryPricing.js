@@ -3,12 +3,17 @@ const fs = require('fs');
 const path = require('path');
 const db = require('../db');
 
-const wilayas = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '..', 'data', 'Wilaya_Of_Algeria.json'), 'utf8')
-).map((w) => ({ code: parseInt(w.code, 10), name: w.name, ar_name: w.ar_name }));
+const wilayaRaw = require('../data/Wilaya_Of_Algeria.json');
+const communeRaw = require('../data/Commune_Of_Algeria.json');
+
+const wilayas = wilayaRaw.map((w) => ({
+  code: parseInt(w.code, 10),
+  name: w.name,
+  ar_name: w.ar_name,
+}));
 
 const communesByWilaya = new Map();
-JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'Commune_Of_Algeria.json'), 'utf8')).forEach((c) => {
+communeRaw.forEach((c) => {
   const wilayaCode = parseInt(c.wilaya_id, 10);
   if (!communesByWilaya.has(wilayaCode)) communesByWilaya.set(wilayaCode, []);
   communesByWilaya.get(wilayaCode).push({ id: parseInt(c.id, 10), name: c.name, ar_name: c.ar_name });

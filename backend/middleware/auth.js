@@ -1,14 +1,23 @@
 // middleware/auth.js — JWT authentication & authorization middleware
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = process.env.JWT_SECRET;
-if (!JWT_SECRET || JWT_SECRET.length < 32) {
-  throw new Error(
-    'JWT_SECRET is missing or too short (must be set in .env with at least 32 characters). Refusing to start with an insecure or hardcoded secret.'
-  );
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret || secret.length < 32) {
+    return null;
+  }
+  return secret;
 }
 
 function requireAuth(req, res, next) {
+  const secret = getJwtSecret();
+  if (!secret) {
+    console.error('[Configuration Error] JWT_SECRET is missing or shorter than 32 characters in environment variables.');
+    return res.status(500).json({
+      error: 'Server configuration error: JWT_SECRET is missing or too short. Please configure JWT_SECRET in your environment variables.',
+    });
+  }
+
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({ error: 'Unauthorized: Authentication token required' });
@@ -20,7 +29,7 @@ function requireAuth(req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, secret);
     req.user = decoded;
     next();
   } catch (err) {
@@ -37,6 +46,12 @@ function requireAuth(req, res, next) {
  * an authenticated admin, e.g. product cost/margin data on the product listing endpoint.
  */
 function optionalAuth(req, res, next) {
+  const secret = getJwtSecret();
+  if (!secret) {
+    req.user = null;
+    return next();
+  }
+
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     req.user = null;
@@ -44,7 +59,7 @@ function optionalAuth(req, res, next) {
   }
   const token = authHeader.split(' ')[1];
   try {
-    req.user = token ? jwt.verify(token, JWT_SECRET) : null;
+    req.user = token ? jwt.verify(token, secret) : null;
   } catch (err) {
     req.user = null;
   }
@@ -54,5 +69,9 @@ function optionalAuth(req, res, next) {
 module.exports = {
   requireAuth,
   optionalAuth,
-  JWT_SECRET,
+  getJwtSecret,
+  get JWT_SECRET() {
+    return process.env.JWT_SECRET;
+  },
 };
+

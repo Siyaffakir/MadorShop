@@ -8,9 +8,21 @@ const bcrypt = require('bcryptjs');
 let poolConfig = {
   decimalNumbers: true,
   waitForConnections: true,
-  connectionLimit: 20,
+  connectionLimit: process.env.VERCEL ? 5 : 20,
   queueLimit: 0,
 };
+
+const shouldUseSSL =
+  process.env.MYSQL_SSL === 'true' ||
+  process.env.DB_SSL === 'true' ||
+  (process.env.DATABASE_URL &&
+    (process.env.DATABASE_URL.includes('ssl=') ||
+      process.env.DATABASE_URL.includes('sslmode=') ||
+      process.env.DATABASE_URL.includes('tidbcloud.com') ||
+      process.env.DATABASE_URL.includes('psdb.cloud') ||
+      process.env.DATABASE_URL.includes('aivencloud.com') ||
+      process.env.DATABASE_URL.includes('neon.tech') ||
+      process.env.DATABASE_URL.includes('supabase.co')));
 
 if (process.env.DATABASE_URL) {
   // Parse DATABASE_URL or pass as uri
@@ -24,8 +36,14 @@ if (process.env.DATABASE_URL) {
       password: decodeURIComponent(url.password || ''),
       database: url.pathname.replace(/^\//, '') || 'dz_shop',
     };
+    if (shouldUseSSL) {
+      poolConfig.ssl = { rejectUnauthorized: false };
+    }
   } catch (err) {
     poolConfig.uri = process.env.DATABASE_URL;
+    if (shouldUseSSL) {
+      poolConfig.ssl = { rejectUnauthorized: false };
+    }
   }
 } else {
   poolConfig = {
@@ -36,6 +54,9 @@ if (process.env.DATABASE_URL) {
     password: process.env.MYSQL_PASSWORD || process.env.DB_PASSWORD || '',
     database: process.env.MYSQL_DATABASE || process.env.DB_NAME || 'dz_shop',
   };
+  if (shouldUseSSL) {
+    poolConfig.ssl = { rejectUnauthorized: false };
+  }
 }
 
 const pool = mysql.createPool(poolConfig);
@@ -440,7 +461,7 @@ async function initDB() {
       1: FAR_SOUTH, 11: FAR_SOUTH, 33: FAR_SOUTH, 37: FAR_SOUTH, 49: FAR_SOUTH, 50: FAR_SOUTH, 52: FAR_SOUTH, 53: FAR_SOUTH, 54: FAR_SOUTH, 56: FAR_SOUTH, 58: FAR_SOUTH,
     };
 
-    const wilayaData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'Wilaya_Of_Algeria.json'), 'utf8'));
+    const wilayaData = require('./data/Wilaya_Of_Algeria.json');
     for (const w of wilayaData) {
       const code = parseInt(w.code, 10);
       const tier = TIER_BY_WILAYA_CODE[code] || MAJOR_CITY;
@@ -457,9 +478,23 @@ async function initDB() {
   console.log('[MySQL] Database initialization completed successfully.');
 }
 
+let initPromise = null;
+function ensureDbInitialized() {
+  if (!initPromise) {
+    initPromise = initDB().catch((err) => {
+      console.error('[Database Error] Initialization failed:', err.message);
+      initPromise = null; // allow retry
+      throw err;
+    });
+  }
+  return initPromise;
+}
+
 module.exports = {
   pool,
   query,
   transaction,
   initDB,
+  ensureDbInitialized,
 };
+

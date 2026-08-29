@@ -78,8 +78,19 @@ app.use('/api/delivery', deliveryRouter);
 app.use('/api/finance', financeRouter);
 app.use('/api/agencies', agenciesRouter);
 
-// Health check endpoint
-app.get('/api/health', async (req, res) => {
+// Automatic DB initialization middleware for serverless invocations
+app.use(async (req, res, next) => {
+  if (req.path === '/api/health' || req.path === '/health' || req.path === '/') return next();
+  try {
+    await db.ensureDbInitialized();
+  } catch (err) {
+    console.error('[DB Init Error]', err.message);
+  }
+  next();
+});
+
+// Root & Health check endpoints
+const healthHandler = async (req, res) => {
   let dbStatus = 'ok';
   try {
     await db.query('SELECT 1');
@@ -87,17 +98,40 @@ app.get('/api/health', async (req, res) => {
     dbStatus = `unreachable: ${err.message}`;
   }
 
+  const apiKeyConfigured = Boolean(process.env.API_KEY && process.env.API_KEY.length >= 16);
+  const jwtConfigured = Boolean(process.env.JWT_SECRET && process.env.JWT_SECRET.length >= 32);
+  const databaseConfigured = Boolean(process.env.DATABASE_URL || process.env.MYSQL_HOST || process.env.DB_HOST);
+
+  const isHealthy = dbStatus === 'ok' && apiKeyConfigured && jwtConfigured && databaseConfigured;
+
   res.json({
-    status: dbStatus === 'ok' ? 'ok' : 'degraded',
+    status: isHealthy ? 'ok' : 'degraded',
+    message: 'Mador Shopping Backend API',
     database: dbStatus,
+    environment: {
+      apiKeyConfigured,
+      jwtConfigured,
+      databaseConfigured,
+      uploadThingConfigured: Boolean(process.env.UPLOADTHING_TOKEN || process.env.UPLOADTHING_SECRET),
+    },
     timestamp: new Date().toISOString(),
     security: {
-      jwt: true,
-      apiKey: true,
+      jwt: jwtConfigured,
+      apiKey: apiKeyConfigured,
       rateLimit: true,
       pathTraversalProtection: true,
       helmetHeaders: true,
     },
+  });
+};
+
+app.get('/api/health', healthHandler);
+app.get('/health', healthHandler);
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Mador Shopping Backend API is running.',
+    healthEndpoint: '/api/health',
+    version: '1.0.0',
   });
 });
 
@@ -110,7 +144,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
 });
 
-// Start server after ensuring DB connection & schema initialization
+// Start server after ensuring DB connection & schema initialization (for local standalone run)
 let server;
 if (require.main === module) {
   db.initDB()
@@ -128,4 +162,7 @@ if (require.main === module) {
     });
 }
 
-module.exports = { app, server, initDB: db.initDB };
+module.exports = app;
+module.exports.app = app;
+module.exports.initDB = db.initDB;
+

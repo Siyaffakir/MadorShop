@@ -32,6 +32,13 @@ router.post('/login', loginLimiter, async (req, res, next) => {
       return res.status(401).json({ error: 'Invalid administrator credentials.' });
     }
 
+    const jwtSecret = JWT_SECRET;
+    if (!jwtSecret || jwtSecret.length < 32) {
+      return res.status(500).json({
+        error: 'Server configuration error: JWT_SECRET is missing or too short in environment variables.',
+      });
+    }
+
     const expiresIn = process.env.JWT_EXPIRES_IN || '24h';
     const token = jwt.sign(
       {
@@ -39,7 +46,7 @@ router.post('/login', loginLimiter, async (req, res, next) => {
         username: admin.username,
         role: 'admin',
       },
-      JWT_SECRET,
+      jwtSecret,
       { expiresIn }
     );
 
