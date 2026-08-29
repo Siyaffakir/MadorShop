@@ -1,0 +1,9 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#15803d"/>
+  <rect x="4" y="4" width="56" height="56" rx="12" fill="#16a34a"/>
+  <!-- Bag Handle -->
+  <path d="M22 24 V16 C22 10.477 26.477 6 32 6 C37.523 6 42 10.477 42 16 V24" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Monogram M in White -->
+  <path d="M18 48 L18 28 L32 40 L46 28 L46 48" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="32" cy="24" r="3" fill="#ffffff" />
+</svg>
