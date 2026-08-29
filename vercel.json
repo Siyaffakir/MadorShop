@@ -5,18 +5,19 @@
       "framework": "vite"
     },
     "backend": {
-      "root": "backend"
+      "root": "backend",
+      "entrypoint": "index.js" 
     }
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
+      "source": "/api/(.)",
       "destination": {
         "service": "backend"
       }
     },
     {
-      "source": "/(.*)",
+      "source": "/(.)",
       "destination": {
         "service": "frontend"
       }
