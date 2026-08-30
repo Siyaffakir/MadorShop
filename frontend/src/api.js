@@ -1,11 +1,11 @@
 // api.js — API client with JWT authentication & security interceptors
 import axios from 'axios';
 
-export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-export const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || 'http://localhost:5000/uploads';
+export const API_URL = import.meta.env.VITE_API_URL || 'https://mador-shop-juff.vercel.app/api';
+export const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || 'https://mador-shop-juff.vercel.app/uploads';
 
 export const TOKEN_STORAGE_KEY = 'dz_admin_token';
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY || 'a821978df0fa07cd5574ffbfd43fccd8a23094ccb56bbf2e8f31d101de2a27a2';
 
 const api = axios.create({
   baseURL: API_URL,

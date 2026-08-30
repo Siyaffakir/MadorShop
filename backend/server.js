@@ -31,19 +31,32 @@ app.use(
 
 // 2. CORS configuration
 const allowedOrigins = CLIENT_ORIGIN.split(',').map((o) => o.trim());
+
+const isAllowedOrigin = (origin) => {
+  if (!origin) return true;
+  if (CLIENT_ORIGIN === '*' || allowedOrigins.includes('*')) return true;
+  if (allowedOrigins.includes(origin)) return true;
+  // Allow all Vercel deployments (production, previews, and branches)
+  if (/^https:\/\/[a-zA-Z0-9_.-]+\.vercel\.app$/.test(origin)) return true;
+  // Allow localhost & local network for development
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) return true;
+  return false;
+};
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+      if (isAllowedOrigin(origin)) {
         return callback(null, true);
       }
       return callback(new Error('CORS policy: Not allowed by CORS'), false);
     },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
   })
 );
+app.options('*', cors());
 
 // 3. Body parsers with size limit defense
 app.use(express.json({ limit: '2mb' }));

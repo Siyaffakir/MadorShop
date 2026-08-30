@@ -26,6 +26,8 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/products" element={<Products />} />
               <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/login" element={<AdminDashboard />} />
               <Route path={`/${ADMIN_PATH}`} element={<AdminDashboard />} />
               {ADMIN_PATH !== 'dz-admin-secure-portal-2026' && (
                 <Route path="/dz-admin-secure-portal-2026" element={<AdminDashboard />} />
