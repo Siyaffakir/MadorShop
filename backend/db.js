@@ -301,35 +301,7 @@ async function initDB() {
         stock: 22,
         image: 'https://images.unsplash.com/photo-1608248597359-0098f98ecbe1?auto=format&fit=crop&w=800&q=80',
       },
-      // 5. Outils de travail
-      {
-        name: 'Lampe de Bureau LED Tactile avec Chargeur Sans Fil & Bras Articulé',
-        description: 'Éclairage de travail professionnel anti-reflets avec variateur d’intensité 5 modes, port USB et support smartphone induction.',
-        price: 5200,
-        buying_price: 2900,
-        category: 'Outils de travail',
-        stock: 28,
-        image: 'https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?auto=format&fit=crop&w=800&q=80',
-      },
-      {
-        name: 'Kit Outils de Précision 115-en-1 avec Tournevis Magnétique',
-        description: 'Coffret d’outils professionnel pour réparation d’ordinateurs, smartphones, montres, appareils électroniques et petits électroménagers.',
-        price: 2900,
-        buying_price: 1500,
-        category: 'Outils de travail',
-        stock: 40,
-        image: 'https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?auto=format&fit=crop&w=800&q=80',
-      },
-      {
-        name: 'Organisateur de Bureau Ergonomique en Métal & Cuir PU',
-        description: 'Station de rangement moderne pour ordinateurs portables, tablettes, stylos, bloc-notes et câbles pour un espace de travail net.',
-        price: 3400,
-        buying_price: 1800,
-        category: 'Outils de travail',
-        stock: 30,
-        image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&w=800&q=80',
-      },
-      // 6. Make up
+      // 5. Make up
       {
         name: 'Palette Ombres à Paupières Nude & Glamour 18 Nuances',
         description: 'Fards soyeux mats et métalliques ultra-pigmentés à tenue 24h. Idéale pour des maquillages naturels ou sophistiqués.',
@@ -357,7 +329,7 @@ async function initDB() {
         stock: 50,
         image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80',
       },
-      // 7. Parfums
+      // 6. Parfums
       {
         name: 'Oud Royal & Ambre Impérial Extrait de Parfum (100ml)',
         description: 'Parfum d’exception aux notes nobles de bois de oud cambodgien, d’ambre doré, de vanille bourbon et d’épices orientales.',
@@ -375,34 +347,6 @@ async function initDB() {
         category: 'Parfums',
         stock: 22,
         image: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80',
-      },
-      // 8. Home
-      {
-        name: 'Diffuseur d’Huiles Essentielles Ultrasonique Effet Flamme 3D',
-        description: 'Humidificateur d’air décoratif silencieux créant une ambiance chaleureuse avec lumière apaisante et arrêt automatique.',
-        price: 4400,
-        buying_price: 2400,
-        category: 'Home',
-        stock: 26,
-        image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
-      },
-      {
-        name: 'Ensemble de 4 Coussins Déco Velours Côtelé Moderne (45x45cm)',
-        description: 'Coussins haut de gamme au tissu ultra-doux avec fermeture invisible, parfaits pour sublimer salon et chambre.',
-        price: 3900,
-        buying_price: 2100,
-        category: 'Home',
-        stock: 30,
-        image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=800&q=80',
-      },
-      {
-        name: 'Organisateur Rotatif 360° Moderne Multi-Niveaux',
-        description: 'Rangement rotatif élégant et gain de place en acrylique renforcé pour cosmétiques, épices, salle de bain et salon.',
-        price: 2700,
-        buying_price: 1400,
-        category: 'Home',
-        stock: 35,
-        image: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80',
       },
     ];
 

@@ -1,79 +1,53 @@
 import { useEffect, useState, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeroBanner from '../components/HeroBanner';
 import ProductCard from '../components/ProductCard';
 import { getRandomProducts, getProducts, getCategories } from '../api';
 import { useLanguage } from '../context/LanguageContext';
 
-const MADOR_CATEGORIES = [
-  {
-    key: 'Complément Alimentaire',
-    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80',
-    query: 'Complément Alimentaire',
-  },
-  {
-    key: 'Pack Complément Alimentaire',
-    img: 'https://images.unsplash.com/photo-1577401239170-897942555fb3?auto=format&fit=crop&w=400&q=80',
-    query: 'Pack Complément Alimentaire',
-  },
-  {
-    key: 'Cosmétique Bio et Naturel',
-    img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=400&q=80',
-    query: 'Cosmétique Bio et Naturel',
-  },
-  {
-    key: 'Pack Cosmétique',
-    img: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=400&q=80',
-    query: 'Pack Cosmétique',
-  },
-  {
-    key: 'Outils de travail',
-    img: 'https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?auto=format&fit=crop&w=400&q=80',
-    query: 'Outils de travail',
-  },
-  {
-    key: 'Make up',
-    img: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=400&q=80',
-    query: 'Make up',
-  },
-  {
-    key: 'Parfums',
-    img: 'https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=400&q=80',
-    query: 'Parfums',
-  },
-  {
-    key: 'Home',
-    img: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80',
-    query: 'Home',
-  },
-];
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
 
 export default function Home() {
-  const { t, dict } = useLanguage();
+  const { t, dict, lang } = useLanguage();
   const [heroProducts, setHeroProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [shuffledProducts, setShuffledProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategoryTab, setSelectedCategoryTab] = useState('ALL');
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([getRandomProducts(6), getProducts(), getCategories()])
       .then(([hero, prods, cats]) => {
         setHeroProducts(hero);
         setAllProducts(prods);
+        setShuffledProducts(shuffleArray(prods));
         setCategories(cats);
       })
       .finally(() => setLoading(false));
   }, []);
 
-  // Filtered products for the "Featured Picks" tabbed section
+  // 10 newest products (last added items)
+  const newestProducts = useMemo(() => {
+    return allProducts.slice(0, 10);
+  }, [allProducts]);
+
+  // Tabbed category items: shows randomized products when "ALL" is selected, or filtered by category
   const tabFilteredProducts = useMemo(() => {
-    if (selectedCategoryTab === 'ALL') return allProducts.slice(0, 12);
+    if (selectedCategoryTab === 'ALL') {
+      return (shuffledProducts.length > 0 ? shuffledProducts : allProducts).slice(0, 12);
+    }
     return allProducts
       .filter((p) => (p.category || '').toLowerCase() === selectedCategoryTab.toLowerCase())
       .slice(0, 12);
-  }, [allProducts, selectedCategoryTab]);
+  }, [allProducts, shuffledProducts, selectedCategoryTab]);
 
   const reviewsList = dict?.home?.reviews?.list || [];
 
@@ -152,50 +126,33 @@ export default function Home() {
       </section>
 
       <div className="container">
-        {/* 3. Shop By Category */}
-        <section className="section" style={{ paddingBottom: '20px' }}>
-          <div className="section-header">
-            <div>
-              <h2 className="section-title">
-                {t('home.departments.title')} <span>{t('home.departments.titleHighlight')}</span>
-              </h2>
-              <p className="section-sub">{t('home.departments.sub')}</p>
-            </div>
-            <Link to="/products" className="view-all-link">
-              {t('home.departments.viewAll')}
-            </Link>
-          </div>
-
-          <div className="category-bubbles">
-            {MADOR_CATEGORIES.map((cat, idx) => {
-              const translatedCatName = dict?.home?.departments?.categories?.[cat.key] || cat.key;
-              return (
-                <div
-                  key={idx}
-                  className="bubble-card"
-                  onClick={() => navigate(`/products?category=${encodeURIComponent(cat.query)}`)}
-                >
-                  <div className="bubble-img-wrap">
-                    <img
-                      src={cat.img}
-                      alt={translatedCatName}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=400&q=80';
-                      }}
-                    />
-                  </div>
-                  <div className="bubble-text-group">
-                    <span className="bubble-label">{translatedCatName}</span>
-                    <span className="bubble-sub-explore">Explorer le rayon ➔</span>
-                  </div>
+        {/* 3. Latest 10 New Arrivals */}
+        {newestProducts.length > 0 && (
+          <section className="section" style={{ paddingTop: '24px', paddingBottom: '20px' }}>
+            <div className="section-header">
+              <div>
+                <div className="section-tag-badge">
+                  {t('home.newArrivals.tag') || '✦ NOUVEAUX ARRIVAGES'}
                 </div>
-              );
-            })}
-          </div>
-        </section>
+                <h2 className="section-title">
+                  {t('home.newArrivals.title') || 'Dernières'} <span>{t('home.newArrivals.titleHighlight') || 'Nouveautés'}</span>
+                </h2>
+                <p className="section-sub">{t('home.newArrivals.sub') || 'Découvrez les 10 derniers articles récemment ajoutés à notre catalogue.'}</p>
+              </div>
+              <Link to="/products?sort=newest" className="view-all-link">
+                {t('home.newArrivals.viewAll') || 'Voir Tout le Catalogue ➔'}
+              </Link>
+            </div>
 
-        {/* 4. Featured Picks (Tabbed Grid) */}
+            <div className="product-grid">
+              {newestProducts.map((p) => (
+                <ProductCard key={`new-${p.id}`} product={p} badge={t('home.newArrivals.badge') || 'NOUVEAU'} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 4. Featured Picks (Tabbed Grid with Randomized ALL items) */}
         <section className="section" style={{ paddingTop: '10px' }}>
           <div className="section-header">
             <div>
@@ -213,7 +170,10 @@ export default function Home() {
           <div className="filter-tabs">
             <button
               className={`filter-tab ${selectedCategoryTab === 'ALL' ? 'active' : ''}`}
-              onClick={() => setSelectedCategoryTab('ALL')}
+              onClick={() => {
+                setSelectedCategoryTab('ALL');
+                setShuffledProducts(shuffleArray(allProducts));
+              }}
             >
               {t('home.favorites.all')}
             </button>
@@ -230,7 +190,7 @@ export default function Home() {
 
           <div className="product-grid">
             {tabFilteredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={`fav-${p.id}`} product={p} />
             ))}
           </div>
 

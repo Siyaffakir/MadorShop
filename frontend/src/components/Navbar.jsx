@@ -32,10 +32,8 @@ export default function Navbar() {
     { label: t('nav.packComplements'), query: 'Pack Complément Alimentaire' },
     { label: t('nav.cosmetiqueBio'), query: 'Cosmétique Bio et Naturel' },
     { label: t('nav.packCosmetique'), query: 'Pack Cosmétique' },
-    { label: t('nav.outils'), query: 'Outils de travail' },
     { label: t('nav.makeup'), query: 'Make up' },
     { label: t('nav.parfums'), query: 'Parfums' },
-    { label: t('nav.home'), query: 'Home' },
   ];
 
   return (

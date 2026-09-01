@@ -9,7 +9,7 @@ export const translations = {
       authenticTag: '✦ Mador Shopping • Votre Boutique Tout-en-Un en Algérie',
       codTag: '✦ Paiement à la Livraison sur',
       wilayasCount: '58 Wilayas',
-      searchPlaceholder: 'Rechercher compléments, cosmétiques bio, packs, outils, makeup, parfums, maison...',
+      searchPlaceholder: 'Rechercher compléments, cosmétiques bio, packs, makeup, parfums...',
       catalog: 'Catalogue',
       bag: 'Panier',
       allProducts: 'Tous les Rayons',
@@ -33,7 +33,7 @@ export const translations = {
         '✦ QUALITÉ CERTIFIÉE & GARANTIE',
         '✦ ARRIVAGES RÉCENTS',
       ],
-      defaultDesc: 'Trouvez tout ce dont vous avez besoin : bien-être, soins naturels, outils professionnels, maquillage, parfums et maison.',
+      defaultDesc: 'Trouvez tout ce dont vous avez besoin : compléments alimentaires, soins cosmétiques bio, maquillage et parfums d’exception.',
       inStockCOD: '• En Stock | Paiement à la livraison 58 Wilayas',
       shopNow: 'Commander',
       explore: 'Découvrir la Boutique',
@@ -56,7 +56,7 @@ export const translations = {
       departments: {
         title: 'Acheter Par',
         titleHighlight: 'Rayon',
-        sub: 'Explorez nos 8 départements : compléments, soins bio, outils de travail, makeup, parfums et maison.',
+        sub: 'Explorez nos 6 départements : compléments alimentaires, soins bio, packs, makeup et parfums.',
         viewAll: 'Voir Tout le Catalogue ➔',
         categories: {
           'Complément Alimentaire': 'Complément Alimentaire',
@@ -73,6 +73,14 @@ export const translations = {
           Haircare: 'Cosmétique Bio et Naturel',
           'Bath & Body': 'Cosmétique Bio et Naturel',
         },
+      },
+      newArrivals: {
+        tag: '✦ NOUVEAUX ARRIVAGES',
+        title: 'Dernières',
+        titleHighlight: 'Nouveautés',
+        sub: 'Découvrez les 10 derniers articles récemment ajoutés à notre catalogue.',
+        viewAll: 'Voir Tout le Catalogue ➔',
+        badge: 'NOUVEAU',
       },
       favorites: {
         title: 'Sélections',
@@ -115,6 +123,13 @@ export const translations = {
           },
         ],
       },
+    },
+
+    // Contact & Owner Support
+    contact: {
+      title: 'Contactez',
+      titleHighlight: 'La Direction & Support',
+      sub: 'Une question sur un article, une commande ou un partenariat ? Contactez directement notre équipe et le propriétaire.',
     },
 
     // Products / Catalog
@@ -376,7 +391,7 @@ export const translations = {
       authenticTag: '✦ Mador Shopping • Your All-in-One Store in Algeria',
       codTag: '✦ Cash on Delivery Across',
       wilayasCount: '58 Wilayas',
-      searchPlaceholder: 'Search supplements, organic cosmetics, packs, tools, makeup, perfumes, home...',
+      searchPlaceholder: 'Search supplements, organic cosmetics, packs, makeup, perfumes...',
       catalog: 'Catalog',
       bag: 'Bag',
       allProducts: 'All Departments',
@@ -400,7 +415,7 @@ export const translations = {
         '✦ GUARANTEED QUALITY',
         '✦ NEW ARRIVALS',
       ],
-      defaultDesc: 'Find everything you need in one place: health supplements, natural beauty, work tools, cosmetics, fragrances, and home goods.',
+      defaultDesc: 'Find everything you need in one place: dietary supplements, natural beauty care, makeup, and exquisite fragrances.',
       inStockCOD: '• In Stock | COD 58 Wilayas',
       shopNow: 'Shop Now',
       explore: 'Explore The Store',
@@ -423,7 +438,7 @@ export const translations = {
       departments: {
         title: 'Shop By',
         titleHighlight: 'Department',
-        sub: 'Explore our 8 core departments: dietary supplements, organic care, work tools, makeup, perfumes, and home living.',
+        sub: 'Explore our 6 core departments: dietary supplements, organic care, packs, makeup, and perfumes.',
         viewAll: 'View All Departments ➔',
         categories: {
           'Complément Alimentaire': 'Dietary Supplements',
@@ -440,6 +455,14 @@ export const translations = {
           Haircare: 'Organic & Natural Cosmetics',
           'Bath & Body': 'Organic & Natural Cosmetics',
         },
+      },
+      newArrivals: {
+        tag: '✦ NEW ARRIVALS',
+        title: 'Latest',
+        titleHighlight: 'New Items',
+        sub: 'Discover the 10 newest products recently added to our store.',
+        viewAll: 'View All Products ➔',
+        badge: 'NEW',
       },
       favorites: {
         title: 'Featured',
@@ -482,6 +505,13 @@ export const translations = {
           },
         ],
       },
+    },
+
+    // Contact & Owner Support
+    contact: {
+      title: 'Contact',
+      titleHighlight: 'Store Owner & Support',
+      sub: 'Have a question regarding a product, order tracking, or business partnership? Reach out directly to the owner and customer care.',
     },
 
     // Products / Catalog

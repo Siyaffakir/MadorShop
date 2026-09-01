@@ -8,10 +8,8 @@ const QUICK_CATEGORIES = [
   'Pack Complément Alimentaire',
   'Cosmétique Bio et Naturel',
   'Pack Cosmétique',
-  'Outils de travail',
   'Make up',
   'Parfums',
-  'Home',
 ];
 
 export default function AdminProductForm({ products, categories, onChange }) {

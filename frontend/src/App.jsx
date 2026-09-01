@@ -5,6 +5,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -36,6 +37,7 @@ export default function App() {
           </main>
           <Footer />
           <CartDrawer />
+          <FloatingWhatsApp />
         </div>
       </CartProvider>
     </AuthProvider>

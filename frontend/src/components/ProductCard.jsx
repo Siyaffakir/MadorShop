@@ -15,24 +15,26 @@ function getProductRating(id) {
   return { score: ratings[idx], count: reviews[idx] };
 }
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, badge }) {
   const { addToCart } = useCart();
   const { t, dict } = useLanguage();
   const img = productImage(product);
   const rating = getProductRating(product.id);
 
   // Dynamic badge
-  let badgeText = null;
-  let badgeClass = '';
-  if (product.price >= 6000) {
-    badgeText = t('productCard.badges.luxe');
-    badgeClass = 'hot';
-  } else if (product.stock > 0 && product.stock <= 15) {
-    badgeText = t('productCard.badges.limited');
-    badgeClass = '';
-  } else {
-    badgeText = t('productCard.badges.bestseller');
-    badgeClass = 'exclusive';
+  let badgeText = badge || null;
+  let badgeClass = badge ? 'new' : '';
+  if (!badge) {
+    if (product.price >= 6000) {
+      badgeText = t('productCard.badges.luxe');
+      badgeClass = 'hot';
+    } else if (product.stock > 0 && product.stock <= 15) {
+      badgeText = t('productCard.badges.limited');
+      badgeClass = '';
+    } else {
+      badgeText = t('productCard.badges.bestseller');
+      badgeClass = 'exclusive';
+    }
   }
 
   const categoryName = dict?.home?.departments?.categories?.[product.category] || product.category || 'Mador Shopping';
