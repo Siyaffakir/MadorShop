@@ -39,6 +39,22 @@ export default function Home() {
     return allProducts.slice(0, 10);
   }, [allProducts]);
 
+  // Trending products: strictly showing only packs from [Pack Complément] and [Pack Cosmétique]
+  const trendingProducts = useMemo(() => {
+    const isPackCategory = (cat = '', name = '') => {
+      const c = (cat || '').toLowerCase();
+      const n = (name || '').toLowerCase();
+      const isComplementPack =
+        (c.includes('pack') && (c.includes('complément') || c.includes('complement') || c.includes('alimentaire'))) ||
+        (n.startsWith('pack') && (c.includes('complément') || c.includes('complement') || c.includes('alimentaire')));
+      const isCosmetiquePack =
+        (c.includes('pack') && (c.includes('cosmétique') || c.includes('cosmetique'))) ||
+        (n.startsWith('pack') && (c.includes('cosmétique') || c.includes('cosmetique')));
+      return isComplementPack || isCosmetiquePack;
+    };
+    return allProducts.filter((p) => isPackCategory(p.category, p.name));
+  }, [allProducts]);
+
   // Tabbed category items: shows randomized products when "ALL" is selected, or filtered by category
   const tabFilteredProducts = useMemo(() => {
     if (selectedCategoryTab === 'ALL') {
@@ -152,7 +168,38 @@ export default function Home() {
           </section>
         )}
 
-        {/* 4. Featured Picks (Tabbed Grid with Randomized ALL items) */}
+        {/* 4. Trending Products (Packs Complément Alimentaire & Cosmétique) */}
+        {trendingProducts.length > 0 && (
+          <section className="section" style={{ paddingTop: '10px', paddingBottom: '20px' }}>
+            <div className="section-header">
+              <div>
+                <div className="section-tag-badge trending-tag">
+                  {t('home.trending.tag') || '🔥 PRODUITS TENDANCES'}
+                </div>
+                <h2 className="section-title">
+                  {t('home.trending.title') || 'Produits'} <span>{t('home.trending.titleHighlight') || 'Tendances'}</span>
+                </h2>
+                <p className="section-sub">{t('home.trending.sub') || 'Sélection exclusive de packs alimentaires et soins cosmétiques les plus demandés.'}</p>
+              </div>
+              <Link to="/products?search=Pack" className="view-all-link">
+                {t('home.trending.viewAll') || 'Voir Tous les Packs ➔'}
+              </Link>
+            </div>
+
+            <div className="product-grid">
+              {trendingProducts.map((p) => (
+                <ProductCard
+                  key={`trending-${p.id}`}
+                  product={p}
+                  badge={t('home.trending.badge') || 'TRENDING 🔥'}
+                  badgeType="trending"
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 5. Featured Picks (Tabbed Grid with Randomized ALL items) */}
         <section className="section" style={{ paddingTop: '10px' }}>
           <div className="section-header">
             <div>

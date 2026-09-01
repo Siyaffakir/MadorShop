@@ -15,7 +15,7 @@ function getProductRating(id) {
   return { score: ratings[idx], count: reviews[idx] };
 }
 
-export default function ProductCard({ product, badge }) {
+export default function ProductCard({ product, badge, badgeType }) {
   const { addToCart } = useCart();
   const { t, dict } = useLanguage();
   const img = productImage(product);
@@ -23,7 +23,7 @@ export default function ProductCard({ product, badge }) {
 
   // Dynamic badge
   let badgeText = badge || null;
-  let badgeClass = badge ? 'new' : '';
+  let badgeClass = badge ? (badgeType || 'new') : '';
   if (!badge) {
     if (product.price >= 6000) {
       badgeText = t('productCard.badges.luxe');

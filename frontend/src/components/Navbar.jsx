@@ -143,9 +143,18 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
-          <Link to="/products?sort=featured" className="dept-item sale-tag">
-            {t('nav.specialOffers')}
-          </Link>
+          <a
+            href="https://ultimatedz.com/sign-up/f61b215f9d7ee27ff88b8de694fee22e"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="dept-item ultimate-btn"
+            title={t('nav.joinUltimate')}
+          >
+            <span className="ultimate-btn-pulse-dot" />
+            <span className="ultimate-btn-icon" aria-hidden="true">✦</span>
+            <span className="ultimate-btn-text">{t('nav.joinUltimate')}</span>
+            <span className="ultimate-btn-arrow" aria-hidden="true">↗</span>
+          </a>
         </div>
       </nav>
     </header>

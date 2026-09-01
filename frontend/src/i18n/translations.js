@@ -23,6 +23,7 @@ export const translations = {
       home: 'Home',
       bestSellers: 'Meilleures Ventes',
       specialOffers: 'Offres Spéciales ★',
+      joinUltimate: 'Devenir Membre Avec Nous',
     },
 
     // Hero Banner
@@ -81,6 +82,14 @@ export const translations = {
         sub: 'Découvrez les 10 derniers articles récemment ajoutés à notre catalogue.',
         viewAll: 'Voir Tout le Catalogue ➔',
         badge: 'NOUVEAU',
+      },
+      trending: {
+        tag: '🔥 PACKS TENDANCES',
+        title: 'Packs',
+        titleHighlight: 'Tendances',
+        sub: 'Découvrez nos coffrets exclusifs en packs compléments alimentaires et packs cosmétiques bio.',
+        viewAll: 'Voir Tous les Packs ➔',
+        badge: 'PACK 🔥',
       },
       favorites: {
         title: 'Sélections',
@@ -405,6 +414,7 @@ export const translations = {
       home: 'Home & Living',
       bestSellers: 'Best Sellers',
       specialOffers: 'Special Offers ★',
+      joinUltimate: 'Become a Member With Us',
     },
 
     // Hero Banner
@@ -463,6 +473,14 @@ export const translations = {
         sub: 'Discover the 10 newest products recently added to our store.',
         viewAll: 'View All Products ➔',
         badge: 'NEW',
+      },
+      trending: {
+        tag: '🔥 TRENDING PACKS',
+        title: 'Trending',
+        titleHighlight: 'Packs',
+        sub: 'Discover our best-selling value packs in dietary supplements and organic cosmetics.',
+        viewAll: 'View All Packs ➔',
+        badge: 'PACK 🔥',
       },
       favorites: {
         title: 'Featured',
