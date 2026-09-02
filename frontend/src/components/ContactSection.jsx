@@ -39,12 +39,11 @@ export default function ContactSection() {
       <div className="container">
         {/* Section Header */}
         <div className="section-header contact-header">
-          <div>
             <div className="contact-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
               </svg>
-              <span>{lang === 'fr' ? '✦ CONTACT & SUPPORT DIRECT' : '✦ CONTACT & DIRECT SUPPORT'}</span>
+              <span>{lang === 'ar' ? '✦ تواصل ودعم مباشر' : '✦ CONTACT & SUPPORT DIRECT'}</span>
             </div>
             <h2 className="section-title">
               {t('contact.title') || 'Contactez'} <span>{t('contact.titleHighlight') || 'La Direction & Support'}</span>
@@ -65,25 +64,25 @@ export default function ContactSection() {
               </svg>
             </div>
             <div className="contact-card-content">
-              <span className="contact-card-tag">{lang === 'fr' ? 'Direction & Propriétaire' : 'Owner & Direct Call'}</span>
-              <h3 className="contact-card-title">{lang === 'fr' ? 'Téléphone Direct' : 'Direct Phone'}</h3>
+              <span className="contact-card-tag">{lang === 'ar' ? 'الإدارة والمالك' : 'Direction & Propriétaire'}</span>
+              <h3 className="contact-card-title">{lang === 'ar' ? 'هاتف مباشر' : 'Téléphone Direct'}</h3>
               <p className="contact-card-value">{OWNER_PHONE}</p>
               <p className="contact-card-desc">
-                {lang === 'fr' ? 'Disponible 7j/7 de 09h00 à 21h00 pour vos questions et urgences.' : 'Available 7d/7 from 09:00 to 21:00 for questions & support.'}
+                {lang === 'ar' ? 'متوفر طيلة أيام الأسبوع من 09:00 إلى 21:00 للإجابة على استفساراتكم.' : 'Disponible 7j/7 de 09h00 à 21h00 pour vos questions et urgences.'}
               </p>
               <div className="contact-card-actions">
                 <a href={`tel:${OWNER_PHONE.replace(/\s+/g, '')}`} className="btn btn-green btn-contact">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
-                  {lang === 'fr' ? 'Appeler' : 'Call Now'}
+                  {lang === 'ar' ? 'اتصال' : 'Appeler'}
                 </a>
                 <button
                   type="button"
                   className="btn btn-contact-outline"
                   onClick={() => handleCopy(OWNER_PHONE, 'phone')}
                 >
-                  {copiedField === 'phone' ? (lang === 'fr' ? '✓ Copié' : '✓ Copied') : (lang === 'fr' ? 'Copier' : 'Copy')}
+                  {copiedField === 'phone' ? (lang === 'ar' ? '✓ تم النسخ' : '✓ Copié') : (lang === 'ar' ? 'نسخ' : 'Copier')}
                 </button>
               </div>
             </div>
@@ -98,11 +97,11 @@ export default function ContactSection() {
               </svg>
             </div>
             <div className="contact-card-content">
-              <span className="contact-card-tag">{lang === 'fr' ? 'Service Client & Pro' : 'Official Support'}</span>
-              <h3 className="contact-card-title">{lang === 'fr' ? 'Email Officiel' : 'Official Email'}</h3>
+              <span className="contact-card-tag">{lang === 'ar' ? 'خدمة العملاء والشركات' : 'Service Client & Pro'}</span>
+              <h3 className="contact-card-title">{lang === 'ar' ? 'البريد الرسمي' : 'Email Officiel'}</h3>
               <p className="contact-card-value">{OWNER_EMAIL}</p>
               <p className="contact-card-desc">
-                {lang === 'fr' ? 'Pour vos demandes écrites, facturation et partenariats professionnels.' : 'For written inquiries, invoicing and partnership requests.'}
+                {lang === 'ar' ? 'لطلباتكم المكتوبة، الفواتير والشراكات المهنية.' : 'Pour vos demandes écrites, facturation et partenariats professionnels.'}
               </p>
               <div className="contact-card-actions">
                 <a href={`mailto:${OWNER_EMAIL}`} className="btn btn-green btn-contact">
@@ -110,14 +109,14 @@ export default function ContactSection() {
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
-                  {lang === 'fr' ? 'Écrire un Email' : 'Send Email'}
+                  {lang === 'ar' ? 'إرسال بريد' : 'Écrire un Email'}
                 </a>
                 <button
                   type="button"
                   className="btn btn-contact-outline"
                   onClick={() => handleCopy(OWNER_EMAIL, 'email')}
                 >
-                  {copiedField === 'email' ? (lang === 'fr' ? '✓ Copié' : '✓ Copied') : (lang === 'fr' ? 'Copier' : 'Copy')}
+                  {copiedField === 'email' ? (lang === 'ar' ? '✓ تم النسخ' : '✓ Copié') : (lang === 'ar' ? 'نسخ' : 'Copier')}
                 </button>
               </div>
             </div>
@@ -131,20 +130,20 @@ export default function ContactSection() {
               </svg>
             </div>
             <div className="contact-card-content">
-              <span className="contact-card-tag">{lang === 'fr' ? 'Messagerie Instantanée' : 'Instant Chat'}</span>
-              <h3 className="contact-card-title">{lang === 'fr' ? 'WhatsApp Direct' : 'Direct WhatsApp'}</h3>
+              <span className="contact-card-tag">{lang === 'ar' ? 'مراسلة فورية' : 'Messagerie Instantanée'}</span>
+              <h3 className="contact-card-title">{lang === 'ar' ? 'واتساب مباشر' : 'WhatsApp Direct'}</h3>
               <p className="contact-card-value">{OWNER_PHONE}</p>
               <p className="contact-card-desc">
-                {lang === 'fr' ? 'Discussion rapide avec le responsable pour photos de produits et suivi.' : 'Instant chat with the owner for product photos & fast tracking.'}
+                {lang === 'ar' ? 'محادثة سريعة مع المسؤول لصور المنتجات ومتابعة الطلبات.' : 'Discussion rapide avec le responsable pour photos de produits et suivi.'}
               </p>
               <div className="contact-card-actions">
                 <a
-                  href={`https://wa.me/${OWNER_PHONE_RAW}?text=${encodeURIComponent('Bonjour Mador Shopping, je souhaite des renseignements.')}`}
+                  href={`https://wa.me/${OWNER_PHONE_RAW}?text=${encodeURIComponent(lang === 'ar' ? 'مرحباً مادور شوبينغ، أود الاستفسار عن منتجاتكم.' : 'Bonjour Mador Shopping, je souhaite des renseignements.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp btn-contact"
                 >
-                  {lang === 'fr' ? 'Ouvrir WhatsApp' : 'Open WhatsApp'}
+                  {lang === 'ar' ? 'فتح واتساب' : 'Ouvrir WhatsApp'}
                 </a>
               </div>
             </div>
@@ -154,27 +153,27 @@ export default function ContactSection() {
         {/* Interactive Quick Contact Box */}
         <div className="contact-form-container">
           <div className="contact-form-header">
-            <h3>{lang === 'fr' ? 'Envoyez un Message Rapide' : 'Send a Quick Message'}</h3>
+            <h3>{lang === 'ar' ? 'أرسل رسالة سريعة' : 'Envoyez un Message Rapide'}</h3>
             <p>
-              {lang === 'fr'
-                ? 'Remplissez ce formulaire pour envoyer directement votre message par WhatsApp ou Email à la direction.'
-                : 'Fill out this quick form to send your message directly via WhatsApp or Email to store management.'}
+              {lang === 'ar'
+                ? 'املأ هذه الاستمارة لإرسال رسالتك مباشرة عبر واتساب أو البريد الإلكتروني إلى الإدارة.'
+                : 'Remplissez ce formulaire pour envoyer directement votre message par WhatsApp ou Email à la direction.'}
             </p>
           </div>
 
           <form className="contact-quick-form" onSubmit={(e) => e.preventDefault()}>
             <div className="contact-form-row">
               <div className="form-group">
-                <label>{lang === 'fr' ? 'Votre Nom & Prénom' : 'Your Full Name'}</label>
+                <label>{lang === 'ar' ? 'الاسم واللقب' : 'Votre Nom & Prénom'}</label>
                 <input
                   type="text"
-                  placeholder={lang === 'fr' ? 'Ex: Mohamed Amine' : 'e.g. John Doe'}
+                  placeholder={lang === 'ar' ? 'مثال: محمد أمين' : 'Ex: Mohamed Amine'}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                 />
               </div>
               <div className="form-group">
-                <label>{lang === 'fr' ? 'Téléphone (Algérie)' : 'Phone Number'}</label>
+                <label>{lang === 'ar' ? 'رقم الهاتف (الجزائر)' : 'Téléphone (Algérie)'}</label>
                 <input
                   type="tel"
                   placeholder="05 / 06 / 07 ..."
@@ -185,20 +184,20 @@ export default function ContactSection() {
             </div>
 
             <div className="form-group">
-              <label>{lang === 'fr' ? 'Objet de votre demande' : 'Subject'}</label>
+              <label>{lang === 'ar' ? 'موضوع الطلب' : 'Objet de votre demande'}</label>
               <input
                 type="text"
-                placeholder={lang === 'fr' ? 'Ex: Renseignement produit, commande, disponibilité...' : 'e.g. Product inquiry, order question...'}
+                placeholder={lang === 'ar' ? 'مثال: استفسار عن منتج، طلبية، توفر...' : 'Ex: Renseignement produit, commande, disponibilité...'}
                 value={form.subject}
                 onChange={(e) => setForm({ ...form, subject: e.target.value })}
               />
             </div>
 
             <div className="form-group">
-              <label>{lang === 'fr' ? 'Votre Message' : 'Your Message'}</label>
+              <label>{lang === 'ar' ? 'رسالتك' : 'Votre Message'}</label>
               <textarea
                 rows="3"
-                placeholder={lang === 'fr' ? 'Écrivez votre message ici...' : 'Type your message here...'}
+                placeholder={lang === 'ar' ? 'اكتب رسالتك هنا...' : 'Écrivez votre message ici...'}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
               />
@@ -213,7 +212,7 @@ export default function ContactSection() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.18c-.24.68-1.4 1.26-1.92 1.34-.5.08-1.14.12-3.32-.78-2.62-1.08-4.3-3.77-4.43-3.94-.13-.17-1.06-1.41-1.06-2.69s.67-1.91.91-2.17c.24-.26.53-.33.71-.33.18 0 .35 0 .5.01.16.01.37-.06.58.44.21.5.73 1.77.79 1.9.06.13.1.28.02.44-.08.17-.12.28-.24.42-.12.14-.26.31-.37.42-.12.12-.25.26-.11.5.14.24.63 1.04 1.35 1.68.93.83 1.71 1.09 1.95 1.21.24.12.38.1.53-.06.14-.17.61-.71.77-.95.16-.24.33-.2.55-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.18 1.26z"/>
                 </svg>
-                {lang === 'fr' ? 'Envoyer via WhatsApp' : 'Send via WhatsApp'}
+                {lang === 'ar' ? 'إرسال عبر واتساب' : 'Envoyer via WhatsApp'}
               </button>
 
               <button
@@ -225,7 +224,7 @@ export default function ContactSection() {
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
-                {lang === 'fr' ? 'Envoyer par Email' : 'Send via Email'}
+                {lang === 'ar' ? 'إرسال عبر البريد الإلكتروني' : 'Envoyer par Email'}
               </button>
             </div>
           </form>

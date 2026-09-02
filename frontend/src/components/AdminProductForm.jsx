@@ -68,19 +68,19 @@ export default function AdminProductForm({ products, categories, onChange }) {
         await updateProduct(editingId, fd);
         setStatus({
           state: 'success',
-          message: lang === 'fr' ? 'Produit mis à jour avec succès.' : 'Product updated successfully.',
+          message: lang === 'ar' ? 'تم تحديث المنتج بنجاح.' : 'Produit mis à jour avec succès.',
         });
       } else {
         await addProduct(fd);
         setStatus({
           state: 'success',
-          message: lang === 'fr' ? 'Produit ajouté au catalogue.' : 'Product added to catalog.',
+          message: lang === 'ar' ? 'تمت إضافة المنتج إلى الكتالوج.' : 'Produit ajouté au catalogue.',
         });
       }
       resetForm();
       onChange();
     } catch (err) {
-      const msg = err?.response?.data?.error || (lang === 'fr' ? 'Une erreur est survenue.' : 'Something went wrong.');
+      const msg = err?.response?.data?.error || (lang === 'ar' ? 'حدث خطأ ما.' : 'Une erreur est survenue.');
       setStatus({ state: 'error', message: msg });
     }
   }
@@ -105,14 +105,14 @@ export default function AdminProductForm({ products, categories, onChange }) {
           </h3>
           {editingId && (
             <button type="button" className="clear-btn" onClick={resetForm}>
-              {lang === 'fr' ? 'Annuler la modification' : 'Cancel Editing'}
+              {lang === 'ar' ? 'إلغاء التعديل' : 'Annuler la modification'}
             </button>
           )}
         </div>
 
         <div className="admin-form-grid">
           <div className="form-group full">
-            <label>{lang === 'fr' ? 'Nom du Produit (ex: Sérum Éclat Hydra)' : 'Product Name (e.g. Hydra Glow Face Serum)'}</label>
+            <label>{lang === 'ar' ? 'اسم المنتج (مثال: سيروم النضارة والترطيب)' : 'Nom du Produit (ex: Sérum Éclat Hydra)'}</label>
             <input
               required
               value={form.name}
@@ -122,7 +122,7 @@ export default function AdminProductForm({ products, categories, onChange }) {
           </div>
 
           <div className="form-group">
-            <label>{lang === 'fr' ? 'Prix de Vente en DZD' : 'Selling Price in DZD'}</label>
+            <label>{lang === 'ar' ? 'سعر البيع (دج)' : 'Prix de Vente en DZD'}</label>
             <input
               type="number"
               min="0"
@@ -135,7 +135,7 @@ export default function AdminProductForm({ products, categories, onChange }) {
           </div>
 
           <div className="form-group">
-            <label>{lang === 'fr' ? 'Prix d’Achat (Coût) en DZD' : 'Buying (Cost) Price in DZD'}</label>
+            <label>{lang === 'ar' ? 'سعر الشراء / التكلفة (دج)' : 'Prix d’Achat (Coût) en DZD'}</label>
             <input
               type="number"
               min="0"
@@ -152,7 +152,7 @@ export default function AdminProductForm({ products, categories, onChange }) {
           </div>
 
           <div className="form-group">
-            <label>{lang === 'fr' ? 'Quantité en Stock (Unités)' : 'Stock Quantity (Units)'}</label>
+            <label>{lang === 'ar' ? 'الكمية في المخزون (قطع)' : 'Quantité en Stock (Unités)'}</label>
             <input
               type="number"
               min="0"
@@ -164,7 +164,7 @@ export default function AdminProductForm({ products, categories, onChange }) {
           </div>
 
           <div className="form-group full">
-            <label>{lang === 'fr' ? 'Catégorie / Rayon' : 'Category / Department'}</label>
+            <label>{lang === 'ar' ? 'القسم / الفئة' : 'Catégorie / Rayon'}</label>
             <input
               required
               list="category-suggestions"
@@ -204,12 +204,12 @@ export default function AdminProductForm({ products, categories, onChange }) {
           </div>
 
           <div className="form-group full">
-            <label>{lang === 'fr' ? 'Description & Bienfaits' : 'Description & Benefits'}</label>
+            <label>{lang === 'ar' ? 'الوصف والمميزات' : 'Description & Bienfaits'}</label>
             <textarea
               rows={3}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              placeholder={lang === 'fr' ? 'Décrivez les actifs, bienfaits et conseils d’utilisation...' : 'Describe formulation benefits, active ingredients, instructions...'}
+              placeholder={lang === 'ar' ? 'صف المكونات، الفوائد وطريقة الاستخدام...' : 'Décrivez les actifs, bienfaits et conseils d’utilisation...'}
             />
           </div>
 
@@ -227,7 +227,7 @@ export default function AdminProductForm({ products, categories, onChange }) {
                   alt="Preview"
                   style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px', border: '1px solid #e5e5e7' }}
                 />
-                <span style={{ fontSize: '11.5px', color: '#71717a' }}>{lang === 'fr' ? 'Aperçu de l’image' : 'Image Preview'}</span>
+                <span style={{ fontSize: '11.5px', color: '#71717a' }}>{lang === 'ar' ? 'معاينة الصورة' : 'Aperçu de l’image'}</span>
               </div>
             )}
           </div>
@@ -236,14 +236,14 @@ export default function AdminProductForm({ products, categories, onChange }) {
         <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
           <button type="submit" className="btn btn-green" disabled={status.state === 'loading'}>
             {status.state === 'loading'
-              ? (lang === 'fr' ? 'Enregistrement...' : 'Saving...')
+              ? (lang === 'ar' ? 'جارٍ الحفظ...' : 'Enregistrement...')
               : editingId
-                ? (lang === 'fr' ? 'Mettre à jour le Produit' : 'Update Product')
-                : (lang === 'fr' ? 'Ajouter au Catalogue' : 'Add to Catalog')}
+                ? (lang === 'ar' ? 'تحديث المنتج' : 'Mettre à jour le Produit')
+                : (lang === 'ar' ? 'إضافة إلى الكتالوج' : 'Ajouter au Catalogue')}
           </button>
           {editingId && (
             <button type="button" className="btn btn-outline-dark" onClick={resetForm}>
-              {lang === 'fr' ? 'Annuler' : 'Cancel'}
+              {lang === 'ar' ? 'إلغاء' : 'Annuler'}
             </button>
           )}
         </div>
@@ -260,13 +260,13 @@ export default function AdminProductForm({ products, categories, onChange }) {
         <table className="admin-table">
           <thead>
             <tr>
-              <th style={{ width: '60px' }}>{lang === 'fr' ? 'Photo' : 'Photo'}</th>
-              <th>{lang === 'fr' ? 'Nom du Produit' : 'Product Name'}</th>
-              <th>{lang === 'fr' ? 'Catégorie' : 'Category'}</th>
-              <th>{lang === 'fr' ? 'Prix' : 'Price'}</th>
-              <th>{lang === 'fr' ? 'Coût / Marge' : 'Cost / Margin'}</th>
-              <th>{lang === 'fr' ? 'Stock' : 'Stock'}</th>
-              <th style={{ textAlign: 'right' }}>{lang === 'fr' ? 'Actions' : 'Actions'}</th>
+              <th style={{ width: '60px' }}>{lang === 'ar' ? 'الصورة' : 'Photo'}</th>
+              <th>{lang === 'ar' ? 'اسم المنتج' : 'Nom du Produit'}</th>
+              <th>{lang === 'ar' ? 'القسم' : 'Catégorie'}</th>
+              <th>{lang === 'ar' ? 'سعر البيع' : 'Prix'}</th>
+              <th>{lang === 'ar' ? 'التكلفة / الهامش' : 'Coût / Marge'}</th>
+              <th>{lang === 'ar' ? 'المخزون' : 'Stock'}</th>
+              <th style={{ textAlign: 'right' }}>{lang === 'ar' ? 'إجراءات' : 'Actions'}</th>
             </tr>
           </thead>
           <tbody>
@@ -296,13 +296,13 @@ export default function AdminProductForm({ products, categories, onChange }) {
                   <td style={{ fontSize: '12px' }}>
                     {cost > 0 ? (
                       <>
-                        <div style={{ color: '#71717a' }}>{lang === 'fr' ? 'Coût :' : 'Cost:'} {cost.toLocaleString('en-US')} DZD</div>
+                        <div style={{ color: '#71717a' }}>{lang === 'ar' ? 'التكلفة:' : 'Coût :'} {cost.toLocaleString('en-US')} DZD</div>
                         <div style={{ fontWeight: '700', color: margin >= 0 ? '#15803d' : '#b91c1c' }}>
-                          {lang === 'fr' ? 'Marge :' : 'Margin:'} {margin.toLocaleString('en-US')} DZD
+                          {lang === 'ar' ? 'الهامش:' : 'Marge :'} {margin.toLocaleString('en-US')} DZD
                         </div>
                       </>
                     ) : (
-                      <span style={{ color: '#b45309' }}>{lang === 'fr' ? 'Aucun coût défini' : 'No cost set'}</span>
+                      <span style={{ color: '#b45309' }}>{lang === 'ar' ? 'لم تُحدد التكلفة' : 'Aucun coût défini'}</span>
                     )}
                   </td>
                   <td>
@@ -314,10 +314,10 @@ export default function AdminProductForm({ products, categories, onChange }) {
                   </td>
                   <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
                     <button className="icon-btn" onClick={() => startEdit(p)}>
-                      {lang === 'fr' ? 'Modifier' : 'Edit'}
+                      {lang === 'ar' ? 'تعديل' : 'Modifier'}
                     </button>
                     <button className="icon-btn danger" onClick={() => handleDelete(p.id)}>
-                      {lang === 'fr' ? 'Supprimer' : 'Delete'}
+                      {lang === 'ar' ? 'حذف' : 'Supprimer'}
                     </button>
                   </td>
                 </tr>
@@ -327,7 +327,7 @@ export default function AdminProductForm({ products, categories, onChange }) {
         </table>
         {products.length === 0 && (
           <div className="empty-state">
-            {lang === 'fr' ? 'Aucun produit dans le catalogue.' : 'No products in catalog yet.'}
+            {lang === 'ar' ? 'لا توجد منتجات في الكتالوج بعد.' : 'Aucun produit dans le catalogue.'}
           </div>
         )}
       </div>

@@ -16,11 +16,12 @@ export default function LanguageSwitcher({ variant = 'default' }) {
       <span className="lang-sep">|</span>
       <button
         type="button"
-        className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-        onClick={() => setLanguage('en')}
-        aria-pressed={lang === 'en'}
+        className={`lang-btn ${lang === 'ar' ? 'active' : ''}`}
+        onClick={() => setLanguage('ar')}
+        aria-pressed={lang === 'ar'}
+        title="العربية"
       >
-        <span className="lang-flag">EN</span>
+        <span className="lang-flag">AR</span>
       </button>
     </div>
   );

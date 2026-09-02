@@ -33,19 +33,19 @@ export default function AdminCustomers({ customers }) {
     <div>
       <div style={{ marginBottom: '16px' }}>
         <h3 style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          {lang === 'fr' ? 'Clients & Historique de Retours' : 'Customers & Return History'}
+          {lang === 'ar' ? 'العملاء وسجل المرتجعات' : 'Clients & Historique de Retours'}
         </h3>
         <p style={{ fontSize: '12.5px', color: '#71717a', marginTop: '6px' }}>
-          {lang === 'fr'
-            ? `Groupés par numéro de téléphone. ${flaggedCount} client(s) ont au moins un colis retourné.`
-            : `Grouped by phone number across all orders. ${flaggedCount} customer${flaggedCount === 1 ? '' : 's'} have at least one returned package.`}
+          {lang === 'ar'
+            ? `مجمعة حسب رقم الهاتف. ${flaggedCount} عميل لديهم طرد مرتجع واحد على الأقل.`
+            : `Groupés par numéro de téléphone. ${flaggedCount} client(s) ont au moins un colis retourné.`}
         </p>
       </div>
 
       <div style={{ marginBottom: '16px', display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
         <input
           type="text"
-          placeholder={lang === 'fr' ? 'Rechercher par nom ou téléphone...' : 'Search by name or phone...'}
+          placeholder={lang === 'ar' ? 'البحث بالاسم أو رقم الهاتف...' : 'Rechercher par nom ou téléphone...'}
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           style={{
@@ -63,15 +63,15 @@ export default function AdminCustomers({ customers }) {
           onChange={(e) => setSortBy(e.target.value)}
           style={{ padding: '9px 12px', borderRadius: '4px', border: '1px solid #d4d4d8', fontSize: '13px' }}
         >
-          <option value="returnedCount">{lang === 'fr' ? 'Tri : Plus grand nb de retours' : 'Sort: Most Returns'}</option>
-          <option value="returnRate">{lang === 'fr' ? 'Tri : Plus fort taux de retour' : 'Sort: Highest Return Rate'}</option>
-          <option value="totalOrders">{lang === 'fr' ? 'Tri : Plus grand nb de commandes' : 'Sort: Most Orders'}</option>
-          <option value="totalSpent">{lang === 'fr' ? 'Tri : Plus fort montant livré' : 'Sort: Highest Delivered Spend'}</option>
+          <option value="returnedCount">{lang === 'ar' ? 'الترتيب: الأكثر إرجاعاً' : 'Tri : Plus grand nb de retours'}</option>
+          <option value="returnRate">{lang === 'ar' ? 'الترتيب: أعلى نسبة إرجاع' : 'Tri : Plus fort taux de retour'}</option>
+          <option value="totalOrders">{lang === 'ar' ? 'الترتيب: الأكثر طلباً' : 'Tri : Plus grand nb de commandes'}</option>
+          <option value="totalSpent">{lang === 'ar' ? 'الترتيب: الأعلى قيمة مستلمة' : 'Tri : Plus fort montant livré'}</option>
         </select>
         <span style={{ fontSize: '12px', color: '#71717a', fontWeight: '600' }}>
-          {lang === 'fr'
-            ? `Affichage de ${filtered.length} sur ${customers.length} clients`
-            : `Showing ${filtered.length} of ${customers.length} customers`}
+          {lang === 'ar'
+            ? `عرض ${filtered.length} من أصل ${customers.length} عميل`
+            : `Affichage de ${filtered.length} sur ${customers.length} clients`}
         </span>
       </div>
 
@@ -79,13 +79,13 @@ export default function AdminCustomers({ customers }) {
         <table className="admin-table">
           <thead>
             <tr>
-              <th>{lang === 'fr' ? 'Nom(s) Client' : 'Customer Name(s)'}</th>
-              <th>{lang === 'fr' ? 'Téléphone' : 'Phone'}</th>
-              <th>{lang === 'fr' ? 'Total Commandes' : 'Total Orders'}</th>
-              <th>{lang === 'fr' ? 'Retournées' : 'Returned'}</th>
-              <th>{lang === 'fr' ? 'Annulées' : 'Canceled'}</th>
-              <th>{lang === 'fr' ? 'Taux de Retour' : 'Return Rate'}</th>
-              <th>{lang === 'fr' ? 'Montant Livré' : 'Delivered Spend'}</th>
+              <th>{lang === 'ar' ? 'اسم العميل' : 'Nom(s) Client'}</th>
+              <th>{lang === 'ar' ? 'الهاتف' : 'Téléphone'}</th>
+              <th>{lang === 'ar' ? 'إجمالي الطلبات' : 'Total Commandes'}</th>
+              <th>{lang === 'ar' ? 'المرتجعة' : 'Retournées'}</th>
+              <th>{lang === 'ar' ? 'الملغاة' : 'Annulées'}</th>
+              <th>{lang === 'ar' ? 'نسبة الإرجاع' : 'Taux de Retour'}</th>
+              <th>{lang === 'ar' ? 'المبلغ المسلّم' : 'Montant Livré'}</th>
             </tr>
           </thead>
           <tbody>
@@ -116,7 +116,7 @@ export default function AdminCustomers({ customers }) {
         </table>
         {filtered.length === 0 && (
           <div className="empty-state">
-            {lang === 'fr' ? 'Aucun client ne correspond à cette recherche.' : 'No customers match this search.'}
+            {lang === 'ar' ? 'لا يوجد أي عميل يطابق هذا البحث.' : 'Aucun client ne correspond à cette recherche.'}
           </div>
         )}
       </div>

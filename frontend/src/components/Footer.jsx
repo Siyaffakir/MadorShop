@@ -46,7 +46,7 @@ export default function Footer() {
 
           {/* Col 3: Contact & Customer Care */}
           <div className="footer-col">
-            <h4>{lang === 'fr' ? 'Contact & Service Client' : 'Contact & Support'}</h4>
+            <h4>{lang === 'ar' ? 'الاتصال وخدمة العملاء' : 'Contact & Service Client'}</h4>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <li>
                 <a href="tel:+213561662874" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontWeight: '700', color: 'var(--color-green)' }}>
@@ -61,7 +61,7 @@ export default function Footer() {
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.18c-.24.68-1.4 1.26-1.92 1.34-.5.08-1.14.12-3.32-.78-2.62-1.08-4.3-3.77-4.43-3.94-.13-.17-1.06-1.41-1.06-2.69s.67-1.91.91-2.17c.24-.26.53-.33.71-.33.18 0 .35 0 .5.01.16.01.37-.06.58.44.21.5.73 1.77.79 1.9.06.13.1.28.02.44-.08.17-.12.28-.24.42-.12.14-.26.31-.37.42-.12.12-.25.26-.11.5.14.24.63 1.04 1.35 1.68.93.83 1.71 1.09 1.95 1.21.24.12.38.1.53-.06.14-.17.61-.71.77-.95.16-.24.33-.2.55-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.18 1.26z"/>
                   </svg>
-                  {lang === 'fr' ? 'WhatsApp : 0561 66 28 74' : 'WhatsApp : +213 561 66 28 74'}
+                  WhatsApp : 0561 66 28 74
                 </a>
               </li>
               <li>
@@ -78,7 +78,7 @@ export default function Footer() {
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
-                {lang === 'fr' ? '7j/7 de 09h00 à 21h00' : '7d/7 from 09:00 to 21:00'}
+                {lang === 'ar' ? 'طيلة أيام الأسبوع من 09:00 إلى 21:00' : '7j/7 de 09h00 à 21h00'}
               </li>
             </ul>
           </div>

@@ -80,13 +80,13 @@ export default function AdminDashboard() {
   }
 
   async function handleDeleteOrder(id) {
-    const confirmMsg = lang === 'fr' ? 'Supprimer cette commande client ?' : 'Delete this customer order?';
+    const confirmMsg = lang === 'ar' ? 'حذف هذا الطلب؟' : 'Supprimer cette commande client ?';
     if (!window.confirm(confirmMsg)) return;
     try {
       await deleteOrder(id);
       loadOrders();
     } catch (err) {
-      alert(err?.response?.data?.error || (lang === 'fr' ? 'Échec de suppression.' : 'Failed to delete order.'));
+      alert(err?.response?.data?.error || (lang === 'ar' ? 'فشل حذف الطلب.' : 'Échec de suppression.'));
     }
   }
 
@@ -95,7 +95,7 @@ export default function AdminDashboard() {
       await updateOrderStatus(id, newStatus);
       loadOrders();
     } catch (err) {
-      alert(err?.response?.data?.error || (lang === 'fr' ? 'Échec de mise à jour.' : 'Failed to update order status.'));
+      alert(err?.response?.data?.error || (lang === 'ar' ? 'فشل تحديث حالة الطلب.' : 'Échec de mise à jour.'));
     }
   }
 
@@ -143,7 +143,7 @@ export default function AdminDashboard() {
       <div className="container section" style={{ textAlign: 'center', padding: '60px 0' }}>
         <div className="loading-spinner" style={{ margin: '0 auto 16px' }} />
         <p style={{ color: '#71717a', fontSize: '14px' }}>
-          {lang === 'fr' ? 'Vérification de l’autorisation de sécurité...' : 'Verifying Security Authorization...'}
+          {lang === 'ar' ? 'جارٍ التحقق من تصريح الأمان...' : 'Vérification de l’autorisation de sécurité...'}
         </p>
       </div>
     );
@@ -154,8 +154,8 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="container section">
-      {/* Top Admin Security & Profile Bar */}
+    <div className="container admin-dashboard">
+      {/* Security & Auth Bar */}
       <div
         style={{
           display: 'flex',
@@ -165,14 +165,15 @@ export default function AdminDashboard() {
           gap: '12px',
           padding: '12px 18px',
           background: '#18181b',
-          color: '#f4f4f5',
-          borderRadius: '8px',
-          marginBottom: '24px',
+          borderRadius: '10px',
+          marginBottom: '28px',
+          color: '#a1a1aa',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span
             style={{
+              display: 'inline-block',
               width: '8px',
               height: '8px',
               borderRadius: '50%',
@@ -181,7 +182,7 @@ export default function AdminDashboard() {
             }}
           />
           <span style={{ fontSize: '13px', fontWeight: '600' }}>
-            {lang === 'fr' ? 'Connecté en tant que' : 'Logged in as'}{' '}
+            {lang === 'ar' ? 'مسجل الدخول كـ' : 'Connecté en tant que'}{' '}
             <strong style={{ color: '#ffffff' }}>{user?.username || 'Admin'}</strong>
           </span>
           <span
@@ -247,12 +248,12 @@ export default function AdminDashboard() {
       <div className="admin-header">
         <div>
           <h1 className="section-title" style={{ fontSize: '28px' }}>
-            {lang === 'fr' ? 'Studio de Gestion' : 'Store Management'} <span>{lang === 'fr' ? 'Boutique' : 'Studio'}</span>
+            {lang === 'ar' ? 'لوحة الإدارة' : 'Studio de Gestion'} <span>{lang === 'ar' ? 'للمتجر' : 'Boutique'}</span>
           </h1>
           <p className="section-sub">
-            {lang === 'fr'
-              ? 'Suivi des commandes clients, mise à jour des statuts et gestion du stock sur 58 Wilayas.'
-              : 'Track customer orders, update confirmation status, and manage catalog across 58 Wilayas.'}
+            {lang === 'ar'
+              ? 'متابعة طلبات العملاء، تحديث الحالات وإدارة المخزون عبر 58 ولاية.'
+              : 'Suivi des commandes clients, mise à jour des statuts et gestion du stock sur 58 Wilayas.'}
           </p>
         </div>
       </div>
@@ -264,10 +265,10 @@ export default function AdminDashboard() {
           <div className="stat-card-value">{stats.ordersCount}</div>
           <div className="stat-card-sub">
             <span style={{ color: '#d97706', fontWeight: '700' }}>
-              {stats.pendingCount} {lang === 'fr' ? 'En attente' : 'Pending'}
+              {stats.pendingCount} {lang === 'ar' ? 'قيد الانتظار' : 'En attente'}
             </span> •{' '}
             <span style={{ color: '#0284c7', fontWeight: '700' }}>
-              {stats.confirmedCount} {lang === 'fr' ? 'Actives/Confirmées' : 'Active/Confirmed'}
+              {stats.confirmedCount} {lang === 'ar' ? 'نشطة / مؤكدة' : 'Actives/Confirmées'}
             </span>
           </div>
         </div>
@@ -280,34 +281,34 @@ export default function AdminDashboard() {
           <div className="stat-card-sub">
             {stats.canceledCount > 0 && (
               <span style={{ color: '#dc2626' }}>
-                {stats.canceledCount} {lang === 'fr' ? 'Annulées • ' : 'Canceled • '}
+                {stats.canceledCount} {lang === 'ar' ? 'ملغاة • ' : 'Annulées • '}
               </span>
             )}
             {stats.returnedCount > 0 && (
               <span style={{ color: '#ea580c' }}>
-                {stats.returnedCount} {lang === 'fr' ? 'Retournées' : 'Returned'}
+                {stats.returnedCount} {lang === 'ar' ? 'مرتجعة' : 'Retournées'}
               </span>
             )}
             {stats.canceledCount === 0 && stats.returnedCount === 0 && (
-              lang === 'fr' ? 'Valeur confirmée & livrée' : 'Confirmed & Delivered Value'
+              lang === 'ar' ? 'القيمة المؤكدة والمسلمة' : 'Valeur confirmée & livrée'
             )}
           </div>
         </div>
 
         <div className="stat-card">
-          <div className="stat-card-title">{lang === 'fr' ? 'Produits Actifs' : 'Active Products'}</div>
+          <div className="stat-card-title">{lang === 'ar' ? 'المنتجات النشطة' : 'Produits Actifs'}</div>
           <div className="stat-card-value">{stats.productsCount}</div>
           <div className="stat-card-sub">
-            {lang === 'fr'
-              ? `Sur ${stats.categoriesCount} Rayons`
-              : `Across ${stats.categoriesCount} Departments`}
+            {lang === 'ar'
+              ? `عبر ${stats.categoriesCount} أقسام`
+              : `Sur ${stats.categoriesCount} Rayons`}
           </div>
         </div>
 
         <div className="stat-card">
           <div className="stat-card-title">{t('admin.kpis.inventoryValue')}</div>
           <div className="stat-card-value">{stats.totalStock}</div>
-          <div className="stat-card-sub">{lang === 'fr' ? 'Unités prêtes à expédier' : 'Ready to Dispatch'}</div>
+          <div className="stat-card-sub">{lang === 'ar' ? 'وحدات جاهزة للشحن' : 'Unités prêtes à expédier'}</div>
         </div>
       </div>
 
@@ -354,7 +355,7 @@ export default function AdminDashboard() {
       {loading && tab !== 'delivery' && tab !== 'finance' ? (
         <div className="loading-state">
           <div className="loading-spinner" />
-          <span>{lang === 'fr' ? 'Synchronisation des données...' : 'Synchronizing Store Data...'}</span>
+          <span>{lang === 'ar' ? 'جارٍ مزامنة البيانات...' : 'Synchronisation des données...'}</span>
         </div>
       ) : tab === 'orders' ? (
         <AdminOrdersTable

@@ -22,20 +22,20 @@ export default function AdminAgencies({ orders, agencies, remittances, onChange 
       await addAgency(name.trim());
       setName('');
       await onChange();
-      setStatus({ state: 'success', message: lang === 'fr' ? 'Agence ajoutée.' : 'Agency added.' });
+      setStatus({ state: 'success', message: lang === 'ar' ? 'تمت إضافة الوكالة بنجاح.' : 'Agence ajoutée.' });
     } catch (err) {
-      setStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'fr' ? 'Échec d’ajout.' : 'Failed to add agency.') });
+      setStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'ar' ? 'فشل إضافة الوكالة.' : 'Échec d’ajout.') });
     }
   }
 
   async function handleDelete(agency) {
-    const confirmMsg = lang === 'fr' ? `Supprimer "${agency.name}" ?` : `Remove "${agency.name}"?`;
+    const confirmMsg = lang === 'ar' ? `هل أنت متأكد من حذف "${agency.name}"؟` : `Supprimer "${agency.name}" ?`;
     if (!window.confirm(confirmMsg)) return;
     try {
       await deleteAgency(agency.id);
       await onChange();
     } catch (err) {
-      alert(err?.response?.data?.error || (lang === 'fr' ? 'Échec de suppression.' : 'Failed to delete agency.'));
+      alert(err?.response?.data?.error || (lang === 'ar' ? 'فشل حذف الوكالة.' : 'Échec de suppression.'));
     }
   }
 
@@ -43,12 +43,12 @@ export default function AdminAgencies({ orders, agencies, remittances, onChange 
     <div>
       <div style={{ marginBottom: '16px' }}>
         <h3 style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          {lang === 'fr' ? 'Sociétés & Agences de Livraison' : 'Delivery Agencies'}
+          {lang === 'ar' ? 'شركات ووكالات التوصيل' : 'Sociétés & Agences de Livraison'}
         </h3>
         <p style={{ fontSize: '12.5px', color: '#71717a', marginTop: '6px' }}>
-          {lang === 'fr'
-            ? 'Ajoutez les prestataires de livraison (Yalidine, ZR Express, etc.). Assignez les commandes dans le détail commande et suivez les règlements dans l’onglet Finance.'
-            : 'Add the courier/delivery companies you work with. Assign orders to an agency from the order detail view, and track what each one still owes you vs. has already paid in the Finance tab.'}
+          {lang === 'ar'
+            ? 'أضف شركات التوصيل التي تتعامل معها (ياليدين، زد آر، إلخ). قم بتعيين الطلبيات لكل وكالة من تفاصيل الطلب وتابع الحسابات في تبويب المالية.'
+            : 'Ajoutez les prestataires de livraison (Yalidine, ZR Express, etc.). Assignez les commandes dans le détail commande et suivez les règlements dans l’onglet Finance.'}
         </p>
       </div>
 
@@ -57,11 +57,11 @@ export default function AdminAgencies({ orders, agencies, remittances, onChange 
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder={lang === 'fr' ? 'ex: Yalidine, ZR Express, Transporteur Privé...' : 'e.g. Yalidine, ZR Express, My Local Courier...'}
+          placeholder={lang === 'ar' ? 'مثال: ياليدين، زد آر إكسبريس، ناقل خاص...' : 'ex: Yalidine, ZR Express, Transporteur Privé...'}
           style={{ flex: '1 1 260px', padding: '10px 14px', border: '1px solid #d4d4d8', borderRadius: '6px', fontSize: '13px' }}
         />
         <button type="submit" className="btn btn-green" disabled={status.state === 'loading'}>
-          {status.state === 'loading' ? (lang === 'fr' ? 'Ajout...' : 'Adding...') : (lang === 'fr' ? 'Ajouter l’Agence' : 'Add Agency')}
+          {status.state === 'loading' ? (lang === 'ar' ? 'جارٍ الإضافة...' : 'Ajout...') : (lang === 'ar' ? 'إضافة الوكالة' : 'Ajouter l’Agence')}
         </button>
       </form>
       {status.message && (
@@ -72,14 +72,14 @@ export default function AdminAgencies({ orders, agencies, remittances, onChange 
         <table className="admin-table">
           <thead>
             <tr>
-              <th>{lang === 'fr' ? 'Agence' : 'Agency'}</th>
-              <th>{lang === 'fr' ? 'Commandes Gérées' : 'Orders Handled'}</th>
-              <th>{lang === 'fr' ? 'Retournées' : 'Returned'}</th>
-              <th>{lang === 'fr' ? 'En Attente de Paiement' : 'Awaiting Payment'}</th>
-              <th>{lang === 'fr' ? 'Encaissé' : 'Received'}</th>
-              <th>{lang === 'fr' ? 'Coût Retours' : 'Return Cost'}</th>
-              <th>{lang === 'fr' ? 'Net Reçu' : 'Net Received'}</th>
-              <th style={{ textAlign: 'right' }}>{lang === 'fr' ? 'Actions' : 'Actions'}</th>
+              <th>{lang === 'ar' ? 'الوكالة' : 'Agence'}</th>
+              <th>{lang === 'ar' ? 'الطلبات المدارة' : 'Commandes Gérées'}</th>
+              <th>{lang === 'ar' ? 'المرتجعة' : 'Retournées'}</th>
+              <th>{lang === 'ar' ? 'بانتظار التحصيل' : 'En Attente de Paiement'}</th>
+              <th>{lang === 'ar' ? 'المحصل' : 'Encaissé'}</th>
+              <th>{lang === 'ar' ? 'تكلفة المرتجعات' : 'Coût Retours'}</th>
+              <th>{lang === 'ar' ? 'الصافي المستلم' : 'Net Reçu'}</th>
+              <th style={{ textAlign: 'right' }}>{lang === 'ar' ? 'إجراءات' : 'Actions'}</th>
             </tr>
           </thead>
           <tbody>
@@ -112,7 +112,7 @@ export default function AdminAgencies({ orders, agencies, remittances, onChange 
                 <td style={{ fontWeight: '800' }}>{formatDZD(s.netReceived)}</td>
                 <td style={{ textAlign: 'right' }}>
                   <button className="icon-btn danger" onClick={() => handleDelete(s.agency)}>
-                    {lang === 'fr' ? 'Supprimer' : 'Delete'}
+                    {lang === 'ar' ? 'حذف' : 'Supprimer'}
                   </button>
                 </td>
               </tr>
@@ -121,7 +121,7 @@ export default function AdminAgencies({ orders, agencies, remittances, onChange 
         </table>
         {stats.length === 0 && (
           <div className="empty-state">
-            {lang === 'fr' ? 'Aucune agence de livraison configurée.' : 'No delivery agencies added yet.'}
+            {lang === 'ar' ? 'لم يتم تكوين أي وكالة توصيل بعد.' : 'Aucune agence de livraison configurée.'}
           </div>
         )}
       </div>

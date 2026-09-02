@@ -83,7 +83,7 @@ export default function AdminOrdersTable({ orders, onDelete, onUpdateStatus, cus
           className={`status-tab-btn ${activeStatusTab === 'ALL' ? 'active' : ''}`}
           onClick={() => setActiveStatusTab('ALL')}
         >
-          {lang === 'fr' ? 'Toutes les Commandes' : 'All Orders'} ({statusCounts.ALL})
+          {lang === 'ar' ? 'جميع الطلبات' : 'Toutes les Commandes'} ({statusCounts.ALL})
         </button>
         {ALL_STATUSES.map((st) => {
           const cfg = STATUS_CONFIG[st];
@@ -183,7 +183,7 @@ export default function AdminOrdersTable({ orders, onDelete, onUpdateStatus, cus
                       if (!stats || stats.returnedCount === 0) return null;
                       return (
                         <div
-                          title={lang === 'fr' ? 'Ce client a déjà retourné des colis' : 'This customer has returned package(s) before'}
+                          title={lang === 'ar' ? 'هذا العميل لديه طرود مرتجعة سابقة' : 'Ce client a déjà retourné des colis'}
                           style={{
                             marginTop: '3px',
                             fontSize: '10.5px',
@@ -191,7 +191,7 @@ export default function AdminOrdersTable({ orders, onDelete, onUpdateStatus, cus
                             color: '#b91c1c',
                           }}
                         >
-                          ⚠ {stats.returnedCount} {lang === 'fr' ? 'retour(s) antérieur(s)' : 'prior return(s)'}
+                          ⚠ {stats.returnedCount} {lang === 'ar' ? 'مرتجع سابق' : 'retour(s) antérieur(s)'}
                         </div>
                       );
                     })()}
@@ -207,17 +207,17 @@ export default function AdminOrdersTable({ orders, onDelete, onUpdateStatus, cus
                     )}
                     <div style={{ fontSize: '11px', color: '#71717a', marginTop: '2px' }}>
                       {o.delivery_type === 'stopdesk'
-                        ? (lang === 'fr' ? '🏬 Stop Desk' : '🏬 Stop Desk')
-                        : (lang === 'fr' ? '🏠 À domicile' : '🏠 Home')}
+                        ? (lang === 'ar' ? '🏬 مكتب الشحن' : '🏬 Stop Desk')
+                        : (lang === 'ar' ? '🏠 للمنزل' : '🏠 À domicile')}
                     </div>
                   </td>
 
                   {/* Delivery Agency & Tracking Tag */}
                   <td style={{ fontSize: '12.5px' }}>
                     {o.delivery_agency_id ? (
-                      <div style={{ fontWeight: '700' }}>{agencyById.get(o.delivery_agency_id) || (lang === 'fr' ? 'Agence inconnue' : 'Unknown agency')}</div>
+                      <div style={{ fontWeight: '700' }}>{agencyById.get(o.delivery_agency_id) || (lang === 'ar' ? 'وكالة غير محددة' : 'Agence inconnue')}</div>
                     ) : (
-                      <span style={{ color: '#a1a1aa' }}>— {lang === 'fr' ? 'aucune' : 'none'} —</span>
+                      <span style={{ color: '#a1a1aa' }}>— {lang === 'ar' ? 'لا توجد' : 'aucune'} —</span>
                     )}
                     {o.tracking_tag && (
                       <div style={{ color: '#71717a', fontFamily: 'monospace', fontSize: '11.5px' }}>{o.tracking_tag}</div>
@@ -227,8 +227,8 @@ export default function AdminOrdersTable({ orders, onDelete, onUpdateStatus, cus
                   {/* Items & Quantity */}
                   <td style={{ maxWidth: '280px' }}>
                     <div style={{ fontWeight: '700', fontSize: '12.5px', color: '#0a0a0a', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <span className="qty-pill">{totalQuantity > 0 ? totalQuantity : 1} {lang === 'fr' ? 'unités' : 'units'}</span>
-                      <span>({items.length > 0 ? items.length : 1} {items.length === 1 ? (lang === 'fr' ? 'article' : 'item') : (lang === 'fr' ? 'articles' : 'items')})</span>
+                      <span className="qty-pill">{totalQuantity > 0 ? totalQuantity : 1} {lang === 'ar' ? 'قطع' : 'unités'}</span>
+                      <span>({items.length > 0 ? items.length : 1} {items.length === 1 ? (lang === 'ar' ? 'منتج' : 'article') : (lang === 'ar' ? 'منتجات' : 'articles')})</span>
                     </div>
                     <div
                       style={{
@@ -303,7 +303,7 @@ export default function AdminOrdersTable({ orders, onDelete, onUpdateStatus, cus
         </table>
         {filteredOrders.length === 0 && (
           <div className="empty-state" style={{ padding: '30px' }}>
-            {lang === 'fr' ? 'Aucune commande ne correspond au filtre.' : 'No orders match the current filter.'}
+            {lang === 'ar' ? 'لا توجد طلبات تطابق الفلتر المحدد.' : 'Aucune commande ne correspond au filtre.'}
           </div>
         )}
       </div>

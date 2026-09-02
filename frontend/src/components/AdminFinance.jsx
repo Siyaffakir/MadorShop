@@ -34,7 +34,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
     setLoadingAdSpend(true);
     return getAdSpend()
       .then(setAdSpend)
-      .catch(() => setAdStatus({ state: 'error', message: lang === 'fr' ? 'Échec de chargement des dépenses publicitaires.' : 'Failed to load ad spend entries.' }))
+      .catch(() => setAdStatus({ state: 'error', message: lang === 'ar' ? 'فشل تحميل سجل مصاريف الإعلانات.' : 'Échec de chargement des dépenses publicitaires.' }))
       .finally(() => setLoadingAdSpend(false));
   }
 
@@ -97,7 +97,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
     if (!adForm.start_date || !adForm.end_date || !adForm.amount) {
       setAdStatus({
         state: 'error',
-        message: lang === 'fr' ? 'La date de début, de fin et le montant sont requis.' : 'Start date, end date and amount are required.',
+        message: lang === 'ar' ? 'تاريخ البدء والانتهاء والمبلغ حقول مطلوبة.' : 'La date de début, de fin et le montant sont requis.',
       });
       return;
     }
@@ -106,14 +106,14 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
       await addAdSpend(adForm.start_date, adForm.end_date, Number(adForm.amount), adForm.note);
       setAdForm({ start_date: '', end_date: '', amount: '', note: '' });
       await loadAdSpend();
-      setAdStatus({ state: 'success', message: lang === 'fr' ? 'Dépense pub ajoutée.' : 'Ad spend entry added.' });
+      setAdStatus({ state: 'success', message: lang === 'ar' ? 'تمت إضافة مصروف الإعلان بنجاح.' : 'Dépense pub ajoutée.' });
     } catch (err) {
-      setAdStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'fr' ? 'Échec d’ajout.' : 'Failed to add entry.') });
+      setAdStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'ar' ? 'فشل إضافة المصروف.' : 'Échec d’ajout.') });
     }
   }
 
   async function handleDeleteAdSpend(id) {
-    const confirmMsg = lang === 'fr' ? 'Supprimer cette dépense publicitaire ?' : 'Delete this ad spend entry?';
+    const confirmMsg = lang === 'ar' ? 'حذف هذا المصروف الإعلاني؟' : 'Supprimer cette dépense publicitaire ?';
     if (!window.confirm(confirmMsg)) return;
     await deleteAdSpend(id);
     loadAdSpend();
@@ -148,11 +148,11 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
   async function handleCreateRemittance(e) {
     e.preventDefault();
     if (selectedIds.size === 0) {
-      setRemitStatus({ state: 'error', message: lang === 'fr' ? 'Sélectionnez au moins une commande ci-dessous.' : 'Select at least one order below.' });
+      setRemitStatus({ state: 'error', message: lang === 'ar' ? 'يرجى تحديد طلبية واحدة على الأقل أدناه.' : 'Sélectionnez au moins une commande ci-dessous.' });
       return;
     }
     if (!remitForm.agency_id) {
-      setRemitStatus({ state: 'error', message: lang === 'fr' ? 'Choisissez l’agence qui a payé.' : 'Choose which agency paid you.' });
+      setRemitStatus({ state: 'error', message: lang === 'ar' ? 'يرجى اختيار الوكالة المسددة.' : 'Choisissez l’agence qui a payé.' });
       return;
     }
     const amount = remitForm.amount !== '' ? Number(remitForm.amount) : selectedSubtotal;
@@ -162,9 +162,9 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
       setSelectedIds(new Set());
       setRemitForm({ agency_id: '', amount: '', note: '' });
       await onRemittanceChange();
-      setRemitStatus({ state: 'success', message: lang === 'fr' ? 'Enregistré — ces commandes sont marquées comme payées.' : 'Recorded — those orders now show as paid.' });
+      setRemitStatus({ state: 'success', message: lang === 'ar' ? 'تم التسجيل — تم تحديد هذه الطلبات كمدفوعة.' : 'Enregistré — ces commandes sont marquées comme payées.' });
     } catch (err) {
-      setRemitStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'fr' ? 'Échec d’enregistrement.' : 'Failed to record payment.') });
+      setRemitStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'ar' ? 'فشل تسجيل الدفعة.' : 'Échec d’enregistrement.') });
     }
   }
 
@@ -181,7 +181,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
     <div>
       <div style={{ marginBottom: '16px' }}>
         <h3 style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          {lang === 'fr' ? 'Aperçu Financier' : 'Finance Overview'}
+          {lang === 'ar' ? 'نظرة عامة على المالية' : 'Aperçu Financier'}
         </h3>
         <p style={{ fontSize: '12.5px', color: '#71717a', marginTop: '6px' }}>
           {lang === 'fr'
@@ -192,11 +192,11 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
 
       <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-end', marginBottom: '20px', flexWrap: 'wrap' }}>
         <div className="form-group" style={{ marginBottom: 0 }}>
-          <label>{lang === 'fr' ? 'Du' : 'From'}</label>
+          <label>{lang === 'ar' ? 'من' : 'Du'}</label>
           <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
         </div>
         <div className="form-group" style={{ marginBottom: 0 }}>
-          <label>{lang === 'fr' ? 'Au' : 'To'}</label>
+          <label>{lang === 'ar' ? 'إلى' : 'Au'}</label>
           <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
         </div>
       </div>
@@ -213,7 +213,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
             marginBottom: '16px',
           }}
         >
-          ⚠ {summary.missingCostCount} {lang === 'fr' ? 'article(s) vendu(s) sans prix d’achat défini' : 'sold line item(s) had no buying price set at order time'}
+          ⚠ {summary.missingCostCount} {lang === 'ar' ? 'منتج(ات) مباعة دون تحديد سعر الشراء' : 'article(s) vendu(s) sans prix d’achat défini'}
           {summary.missingCostNames.length > 0 && ` (${summary.missingCostNames.slice(0, 5).join(', ')}${summary.missingCostNames.length > 5 ? ', ...' : ''})`}
           {lang === 'fr'
             ? ' — le bénéfice affiché peut être surestimé. Définissez les prix d’achat dans le Catalogue.'
@@ -223,30 +223,30 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
 
       <div className="admin-stats-grid">
         <div className="stat-card">
-          <div className="stat-card-title">{lang === 'fr' ? 'Chiffre d’Affaires' : 'Revenue'}</div>
+          <div className="stat-card-title">{lang === 'ar' ? 'إجمالي المداخيل' : 'Chiffre d’Affaires'}</div>
           <div className="stat-card-value" style={{ fontSize: '20px' }}>{formatDZD(summary.revenue)}</div>
-          <div className="stat-card-sub">{lang === 'fr' ? 'Confirmées / Expédiées / Livrées' : 'Confirmed / Shipped / Delivered'}</div>
+          <div className="stat-card-sub">{lang === 'ar' ? 'مؤكدة / مشحونة / مسلّمة' : 'Confirmées / Expédiées / Livrées'}</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-title">{lang === 'fr' ? 'Coût d’Achat Marchandises' : 'Cost of Goods'}</div>
+          <div className="stat-card-title">{lang === 'ar' ? 'تكلفة شراء السلع' : 'Coût d’Achat Marchandises'}</div>
           <div className="stat-card-value" style={{ fontSize: '20px', color: '#b45309' }}>
             −{formatDZD(summary.cogs)}
           </div>
-          <div className="stat-card-sub">{lang === 'fr' ? 'Prix d’achat × quantité vendue' : 'Buying price × quantity sold'}</div>
+          <div className="stat-card-sub">{lang === 'ar' ? 'سعر الشراء × الكمية المباعة' : 'Prix d’achat × quantité vendue'}</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-title">{lang === 'fr' ? 'Frais Retours Absorbés' : 'Return Delivery Cost'}</div>
+          <div className="stat-card-title">{lang === 'ar' ? 'تكلفة شحن المرتجعات' : 'Frais Retours Absorbés'}</div>
           <div className="stat-card-value" style={{ fontSize: '20px', color: '#b45309' }}>
             −{formatDZD(summary.returnDeliveryCost)}
           </div>
-          <div className="stat-card-sub">{lang === 'fr' ? 'Frais transporteur sur colis retournés' : 'Courier fee absorbed on returned packages'}</div>
+          <div className="stat-card-sub">{lang === 'ar' ? 'رسوم الشحن المدفوعة على الطرود المرتجعة' : 'Frais transporteur sur colis retournés'}</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-title">{lang === 'fr' ? 'Dépenses Publicitaires' : 'Sponsor / Ad Spend'}</div>
+          <div className="stat-card-title">{lang === 'ar' ? 'مصاريف الإعلانات (سبونسور)' : 'Dépenses Publicitaires'}</div>
           <div className="stat-card-value" style={{ fontSize: '20px', color: '#b45309' }}>
             −{formatDZD(summary.adSpendTotal)}
           </div>
-          <div className="stat-card-sub">{lang === 'fr' ? 'Dépenses sur cette période' : 'Entries overlapping this range'}</div>
+          <div className="stat-card-sub">{lang === 'ar' ? 'المصاريف خلال هذه الفترة' : 'Dépenses sur cette période'}</div>
         </div>
       </div>
 
@@ -260,7 +260,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
         }}
       >
         <div style={{ fontSize: '11.5px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#71717a' }}>
-          {lang === 'fr' ? 'Bénéfice Net' : 'Net Profit'} ({startDate} → {endDate})
+          {lang === 'ar' ? 'صافي الأرباح' : 'Bénéfice Net'} ({startDate} → {endDate})
         </div>
         <div style={{ fontSize: '28px', fontWeight: '900', color: summary.netProfit >= 0 ? '#1e7a46' : '#b91c1c' }}>
           {formatDZD(summary.netProfit)}
@@ -270,7 +270,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
       {/* Order Pipeline: what's still coming in vs what's already confirmed */}
       <div style={{ marginTop: '32px' }}>
         <h3 style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '4px' }}>
-          {lang === 'fr' ? 'Tunnel des Commandes' : 'Order Pipeline'}
+          {lang === 'ar' ? 'مراحل الطلبات والمستحقات' : 'Tunnel des Commandes'}
         </h3>
         <p style={{ fontSize: '12.5px', color: '#71717a', marginBottom: '12px' }}>
           {lang === 'fr'
@@ -279,19 +279,19 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
         </p>
         <div className="admin-stats-grid">
           <div className="stat-card">
-            <div className="stat-card-title">{lang === 'fr' ? 'À Venir (En attente)' : 'Coming (Pending)'}</div>
+            <div className="stat-card-title">{lang === 'ar' ? 'قيد الانتظار' : 'À Venir (En attente)'}</div>
             <div className="stat-card-value">{incomingOrders.length}</div>
-            <div className="stat-card-sub">{lang === 'fr' ? 'Non confirmées — pas d’argent engagé' : 'Not yet confirmed — no cash involved'}</div>
+            <div className="stat-card-sub">{lang === 'ar' ? 'طلبات غير مؤكدة — لا توجد تكاليف بعد' : 'Non confirmées — pas d’argent engagé'}</div>
           </div>
           <div className="stat-card">
-            <div className="stat-card-title">{lang === 'fr' ? 'En Attente de Paiement Agence' : 'Awaiting Agency Payment'}</div>
+            <div className="stat-card-title">{lang === 'ar' ? 'بانتظار سداد الوكالة' : 'En Attente de Paiement Agence'}</div>
             <div className="stat-card-value" style={{ color: '#b45309' }}>{awaitingPayment.length}</div>
-            <div className="stat-card-sub">{formatDZD(awaitingPayment.reduce((s, o) => s + orderSubtotal(o), 0))} {lang === 'fr' ? 'qui vous sont dus' : 'owed to you'}</div>
+            <div className="stat-card-sub">{formatDZD(awaitingPayment.reduce((s, o) => s + orderSubtotal(o), 0))} {lang === 'ar' ? 'مستحقة لك' : 'qui vous sont dus'}</div>
           </div>
           <div className="stat-card">
-            <div className="stat-card-title">{lang === 'fr' ? 'Paiement Encaissé' : 'Payment Received'}</div>
+            <div className="stat-card-title">{lang === 'ar' ? 'المبالغ المحصلة' : 'Paiement Encaissé'}</div>
             <div className="stat-card-value" style={{ color: '#1e7a46' }}>{confirmedOrders.length - awaitingPayment.length}</div>
-            <div className="stat-card-sub">{lang === 'fr' ? 'Confirmé par écriture de registre' : 'Confirmed by a ledger entry below'}</div>
+            <div className="stat-card-sub">{lang === 'ar' ? 'مؤكدة ومسجلة في السجل أدناه' : 'Confirmé par écriture de registre'}</div>
           </div>
         </div>
       </div>
@@ -304,7 +304,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
 
         {awaitingPayment.length === 0 ? (
           <div className="empty-state">
-            {lang === 'fr' ? 'Rien en attente — chaque commande confirmée a son paiement enregistré.' : 'Nothing pending — every confirmed order has a payment recorded below.'}
+            {lang === 'ar' ? 'لا توجد مستحقات معلقة — جميع الطلبات المؤكدة مسجلة كمدفوعة.' : 'Rien en attente — chaque commande confirmée a son paiement enregistré.'}
           </div>
         ) : (
           <>
@@ -313,11 +313,11 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
                 <thead>
                   <tr>
                     <th style={{ width: '36px' }}></th>
-                    <th>{lang === 'fr' ? 'N° Commande' : 'Order #'}</th>
-                    <th>{lang === 'fr' ? 'Client' : 'Customer'}</th>
-                    <th>{lang === 'fr' ? 'Agence' : 'Agency'}</th>
-                    <th>{lang === 'fr' ? 'Statut' : 'Status'}</th>
-                    <th>{lang === 'fr' ? 'Sous-total Dû' : 'Subtotal Owed'}</th>
+                    <th>{lang === 'ar' ? 'رقم الطلب' : 'N° Commande'}</th>
+                    <th>{lang === 'ar' ? 'العميل' : 'Client'}</th>
+                    <th>{lang === 'ar' ? 'الوكالة' : 'Agence'}</th>
+                    <th>{lang === 'ar' ? 'الحالة' : 'Statut'}</th>
+                    <th>{lang === 'ar' ? 'المبلغ المستحق' : 'Sous-total Dû'}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -328,7 +328,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
                       </td>
                       <td style={{ fontWeight: '700' }}>#{o.id}</td>
                       <td>{o.full_name}</td>
-                      <td>{o.delivery_agency_id ? (agencyById.get(o.delivery_agency_id) || (lang === 'fr' ? 'Inconnue' : 'Unknown')) : <span style={{ color: '#a1a1aa' }}>— {lang === 'fr' ? 'aucune' : 'none'} —</span>}</td>
+                      <td>{o.delivery_agency_id ? (agencyById.get(o.delivery_agency_id) || (lang === 'ar' ? 'غير محددة' : 'Inconnue')) : <span style={{ color: '#a1a1aa' }}>— {lang === 'ar' ? 'لا توجد' : 'aucune'} —</span>}</td>
                       <td>{dict?.admin?.status?.[o.status] || o.status}</td>
                       <td style={{ fontWeight: '700' }}>{formatDZD(orderSubtotal(o))}</td>
                     </tr>
@@ -339,20 +339,20 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
 
             <form onSubmit={handleCreateRemittance} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'flex-end' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>{lang === 'fr' ? 'Payé par l’Agence' : 'Paid By Agency'}</label>
+                <label>{lang === 'ar' ? 'سددتها الوكالة' : 'Payé par l’Agence'}</label>
                 <select
                   value={remitForm.agency_id}
                   onChange={(e) => setRemitForm({ ...remitForm, agency_id: e.target.value })}
                   style={{ minWidth: '180px' }}
                 >
-                  <option value="">{lang === 'fr' ? 'Sélectionner l’agence...' : 'Select agency...'}</option>
+                  <option value="">{lang === 'ar' ? 'اختر الوكالة...' : 'Sélectionner l’agence...'}</option>
                   {(agencies || []).map((a) => (
                     <option key={a.id} value={a.id}>{a.name}</option>
                   ))}
                 </select>
               </div>
               <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>{lang === 'fr' ? 'Montant Reçu (DZD)' : 'Amount Received (DZD)'}</label>
+                <label>{lang === 'ar' ? 'المبلغ المستلم (دج)' : 'Montant Reçu (DZD)'}</label>
                 <input
                   type="number"
                   min="0"
@@ -363,7 +363,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
                 />
               </div>
               <div className="form-group" style={{ marginBottom: 0 }}>
-                <label>{lang === 'fr' ? 'Note (optionnelle)' : 'Note (optional)'}</label>
+                <label>{lang === 'ar' ? 'ملاحظة (اختياري)' : 'Note (optionnelle)'}</label>
                 <input
                   type="text"
                   value={remitForm.note}
@@ -373,7 +373,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
               </div>
               <button type="submit" className="btn btn-green" disabled={remitStatus.state === 'loading'}>
                 {remitStatus.state === 'loading'
-                  ? (lang === 'fr' ? 'Enregistrement...' : 'Saving...')
+                  ? (lang === 'ar' ? 'جارٍ التسجيل...' : 'Enregistrement...')
                   : lang === 'fr'
                     ? `Marquer ${selectedIds.size || ''} Commande(s) comme Payée(s)`
                     : `Mark ${selectedIds.size || ''} Order${selectedIds.size === 1 ? '' : 's'} as Paid`}
@@ -389,18 +389,18 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
       {/* Agency Payment Ledger — the actual proof-of-payment rows */}
       <div style={{ marginTop: '32px' }}>
         <h3 style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '12px' }}>
-          {lang === 'fr' ? 'Registre des Paiements Agences' : 'Agency Payment Ledger'}
+          {lang === 'ar' ? 'سجل دفعات وكالات التوصيل' : 'Registre des Paiements Agences'}
         </h3>
         <div className="table-scroll">
           <table className="admin-table">
             <thead>
               <tr>
-                <th>{lang === 'fr' ? 'Date' : 'Date'}</th>
+                <th>{lang === 'ar' ? 'التاريخ' : 'Date'}</th>
                 <th>{lang === 'fr' ? 'Agence' : 'Agency'}</th>
-                <th>{lang === 'fr' ? 'Montant' : 'Amount'}</th>
-                <th>{lang === 'fr' ? 'Commandes Couvertes' : 'Orders Covered'}</th>
-                <th>{lang === 'fr' ? 'Note' : 'Note'}</th>
-                <th style={{ textAlign: 'right' }}>{lang === 'fr' ? 'Actions' : 'Actions'}</th>
+                <th>{lang === 'ar' ? 'المبلغ' : 'Montant'}</th>
+                <th>{lang === 'ar' ? 'الطلبات المشمولة' : 'Commandes Couvertes'}</th>
+                <th>{lang === 'ar' ? 'ملاحظة' : 'Note'}</th>
+                <th style={{ textAlign: 'right' }}>{lang === 'ar' ? 'إجراءات' : 'Actions'}</th>
               </tr>
             </thead>
             <tbody>
@@ -453,7 +453,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
             />
           </div>
           <div className="form-group">
-            <label>{lang === 'fr' ? 'Montant (DZD)' : 'Amount (DZD)'}</label>
+            <label>{lang === 'ar' ? 'المبلغ (دج)' : 'Montant (DZD)'}</label>
             <input
               type="number"
               min="0"
@@ -508,7 +508,7 @@ export default function AdminFinance({ orders, agencies, remittances, onRemittan
                     <td style={{ color: '#71717a' }}>{entry.note || '—'}</td>
                     <td style={{ textAlign: 'right' }}>
                       <button className="icon-btn danger" onClick={() => handleDeleteAdSpend(entry.id)}>
-                        {lang === 'fr' ? 'Supprimer' : 'Delete'}
+                        {lang === 'ar' ? 'حذف' : 'Supprimer'}
                       </button>
                     </td>
                   </tr>

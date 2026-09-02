@@ -3321,4 +3321,74 @@ ul {
   }
 }
 
+/* ==========================================================================
+   RTL (RIGHT-TO-LEFT) & ARABIC SUPPORT
+   ========================================================================== */
+
+[dir="rtl"],
+html[dir="rtl"] body {
+  font-family: 'Cairo', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0;
+  text-align: right;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] .section-title,
+[dir="rtl"] .hero-title,
+[dir="rtl"] .logo-main,
+[dir="rtl"] .navbar-brand {
+  font-family: 'Cairo', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0;
+}
+
+/* Numbers, Phones, and Tracking preserved in LTR */
+[dir="rtl"] input[type="tel"],
+[dir="rtl"] input[type="number"],
+[dir="rtl"] .product-price,
+[dir="rtl"] .cart-item-price,
+[dir="rtl"] .summary-value,
+[dir="rtl"] .price-current,
+[dir="rtl"] .price-original,
+[dir="rtl"] .order-ref-badge,
+[dir="rtl"] .admin-kpi-value,
+[dir="rtl"] .contact-card-value {
+  direction: ltr;
+  display: inline-block;
+  unicode-bidi: embed;
+}
+
+/* Cart drawer in RTL: slide from left */
+[dir="rtl"] .cart-drawer-overlay {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .cart-drawer {
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  animation: slideInLeft 0.25s ease-out;
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Form selects and inputs padding in RTL */
+[dir="rtl"] select,
+[dir="rtl"] input,
+[dir="rtl"] textarea {
+  text-align: right;
+}
+
+/* Badges and text pills */
+[dir="rtl"] .badge-green,
+[dir="rtl"] .badge-new,
+[dir="rtl"] .badge-pack {
+  letter-spacing: 0;
+}
+
 

@@ -9,7 +9,7 @@ export function LanguageProvider({ children }) {
   const [lang, setLangState] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'fr' || saved === 'en') return saved;
+      if (saved === 'fr' || saved === 'ar') return saved;
       // Default to French for Algerian e-commerce context
       return 'fr';
     } catch {
@@ -25,11 +25,12 @@ export function LanguageProvider({ children }) {
     }
     if (typeof document !== 'undefined') {
       document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     }
   }, [lang]);
 
   function setLanguage(newLang) {
-    if (newLang === 'fr' || newLang === 'en') {
+    if (newLang === 'fr' || newLang === 'ar') {
       setLangState(newLang);
     }
   }
@@ -42,8 +43,8 @@ export function LanguageProvider({ children }) {
       if (value && typeof value === 'object' && key in value) {
         value = value[key];
       } else {
-        // Fallback to English if missing in current language
-        let fallback = translations.en;
+        // Fallback to French if missing in current language
+        let fallback = translations.fr;
         for (const fKey of keys) {
           if (fallback && typeof fallback === 'object' && fKey in fallback) {
             fallback = fallback[fKey];

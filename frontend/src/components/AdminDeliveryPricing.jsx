@@ -18,7 +18,7 @@ export default function AdminDeliveryPricing() {
         setPricing(data.pricing || []);
         setThreshold(data.freeDeliveryThreshold || 10000);
       })
-      .catch(() => setStatus({ state: 'error', message: lang === 'fr' ? 'Échec de chargement des tarifs.' : 'Failed to load delivery pricing.' }))
+      .catch(() => setStatus({ state: 'error', message: lang === 'ar' ? 'فشل تحميل أسعار التوصيل.' : 'Échec de chargement des tarifs.' }))
       .finally(() => setLoading(false));
   }
 
@@ -44,7 +44,7 @@ export default function AdminDeliveryPricing() {
     const homeFee = Number(draft.home_fee);
     const stopdeskFee = Number(draft.stopdesk_fee);
     if (!Number.isFinite(homeFee) || homeFee < 0 || !Number.isFinite(stopdeskFee) || stopdeskFee < 0) {
-      setStatus({ state: 'error', message: lang === 'fr' ? 'Les tarifs doivent être des nombres positifs.' : 'Fees must be non-negative numbers.' });
+      setStatus({ state: 'error', message: lang === 'ar' ? 'يجب أن تكون الأسعار أرقاماً موجبة.' : 'Les tarifs doivent être des nombres positifs.' });
       return;
     }
     setSavingCode(row.wilaya_code);
@@ -59,10 +59,10 @@ export default function AdminDeliveryPricing() {
       });
       setStatus({
         state: 'success',
-        message: lang === 'fr' ? `Tarifs mis à jour pour ${row.wilaya_name}.` : `Updated ${row.wilaya_name} delivery fees.`,
+        message: lang === 'ar' ? `تم تحديث أسعار التوصيل لولاية ${row.wilaya_name}.` : `Tarifs mis à jour pour ${row.wilaya_name}.`,
       });
     } catch (err) {
-      setStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'fr' ? 'Échec de mise à jour.' : 'Failed to update pricing.') });
+      setStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'ar' ? 'فشل تحديث الأسعار.' : 'Échec de mise à jour.') });
     } finally {
       setSavingCode(null);
     }
@@ -72,7 +72,7 @@ export default function AdminDeliveryPricing() {
     return (
       <div className="loading-state">
         <div className="loading-spinner" />
-        <span>{lang === 'fr' ? 'Chargement des tarifs de livraison...' : 'Loading Delivery Pricing...'}</span>
+        <span>{lang === 'ar' ? 'جارٍ تحميل أسعار التوصيل...' : 'Chargement des tarifs de livraison...'}</span>
       </div>
     );
   }
@@ -81,12 +81,12 @@ export default function AdminDeliveryPricing() {
     <div>
       <div style={{ marginBottom: '16px' }}>
         <h3 style={{ fontSize: '16px', fontWeight: '900', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          {lang === 'fr' ? 'Tarifs de Livraison par Wilaya' : 'Delivery Pricing by Wilaya'}
+          {lang === 'ar' ? 'أسعار التوصيل حسب الولاية' : 'Tarifs de Livraison par Wilaya'}
         </h3>
         <p style={{ fontSize: '12.5px', color: '#71717a', marginTop: '6px' }}>
-          {lang === 'fr'
-            ? 'Les frais de livraison à domicile et en point relais sont calculés automatiquement lors du passage de commande. Ajustez ces montants selon vos contrats avec les agences de livraison.'
-            : 'Home and stop-desk delivery fees are calculated automatically during checkout. Adjust these rates according to your shipping courier contracts.'}
+          {lang === 'ar'
+            ? 'يتم حساب رسوم التوصيل إلى المنزل أو نقطة الاستلام تلقائياً عند تأكيد الطلب. يمكنك تعديل هذه المبالغ حسب اتفاقياتك مع شركات التوصيل.'
+            : 'Les frais de livraison à domicile et en point relais sont calculés automatiquement lors du passage de commande. Ajustez ces montants selon vos contrats avec les agences de livraison.'}
         </p>
         {status.message && (
           <p className={`form-msg ${status.state === 'success' ? 'success' : 'error'}`} style={{ marginTop: '8px' }}>
@@ -99,11 +99,11 @@ export default function AdminDeliveryPricing() {
         <table className="admin-table">
           <thead>
             <tr>
-              <th style={{ width: '50px' }}>{lang === 'fr' ? 'Code' : 'Code'}</th>
-              <th>{lang === 'fr' ? 'Wilaya' : 'Wilaya'}</th>
-              <th>{lang === 'fr' ? 'Frais Domicile (DZD)' : 'Home Delivery Fee (DZD)'}</th>
-              <th>{lang === 'fr' ? 'Frais Point Relais (DZD)' : 'Stop Desk Fee (DZD)'}</th>
-              <th style={{ textAlign: 'right' }}>{lang === 'fr' ? 'Actions' : 'Actions'}</th>
+              <th style={{ width: '50px' }}>{lang === 'ar' ? 'الرمز' : 'Code'}</th>
+              <th>{lang === 'ar' ? 'الولاية' : 'Wilaya'}</th>
+              <th>{lang === 'ar' ? 'توصيل للمنزل (دج)' : 'Frais Domicile (DZD)'}</th>
+              <th>{lang === 'ar' ? 'نقطة استلام (دج)' : 'Frais Point Relais (DZD)'}</th>
+              <th style={{ textAlign: 'right' }}>{lang === 'ar' ? 'إجراءات' : 'Actions'}</th>
             </tr>
           </thead>
           <tbody>
@@ -141,8 +141,8 @@ export default function AdminDeliveryPricing() {
                       onClick={() => handleSave(row)}
                     >
                       {savingCode === row.wilaya_code
-                        ? (lang === 'fr' ? 'Enregistrement...' : 'Saving...')
-                        : (lang === 'fr' ? 'Enregistrer' : 'Save')}
+                        ? (lang === 'ar' ? 'جارٍ الحفظ...' : 'Enregistrement...')
+                        : (lang === 'ar' ? 'حفظ' : 'Enregistrer')}
                     </button>
                   </td>
                 </tr>

@@ -17,7 +17,7 @@ export default function AdminLogin() {
     if (!username.trim() || !password) {
       setStatus({
         loading: false,
-        error: lang === 'fr' ? 'Veuillez saisir le nom d’utilisateur et le mot de passe.' : 'Please enter both username and password.',
+        error: lang === 'ar' ? 'يرجى إدخال اسم المستخدم وكلمة المرور.' : 'Veuillez saisir le nom d’utilisateur et le mot de passe.',
       });
       return;
     }
@@ -29,7 +29,7 @@ export default function AdminLogin() {
       const errorMsg =
         err?.response?.data?.error ||
         err?.message ||
-        (lang === 'fr' ? 'Échec de l’authentification. Vérifiez vos identifiants.' : 'Authentication failed. Please verify your credentials.');
+        (lang === 'ar' ? 'فشل تسجيل الدخول. يرجى التحقق من صحة البيانات المدخلة.' : 'Échec de l’authentification. Vérifiez vos identifiants.');
       setStatus({ loading: false, error: errorMsg });
     }
   }

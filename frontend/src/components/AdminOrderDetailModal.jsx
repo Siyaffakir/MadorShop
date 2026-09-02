@@ -38,7 +38,7 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
       await onUpdateLogistics(order.id, agencyDraft || null, tagDraft);
       setLogisticsStatus({ state: 'success', message: lang === 'fr' ? 'Enregistré.' : 'Saved.' });
     } catch (err) {
-      setLogisticsStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'fr' ? 'Échec.' : 'Failed to save.') });
+      setLogisticsStatus({ state: 'error', message: err?.response?.data?.error || (lang === 'ar' ? 'فشل الحفظ.' : 'Échec.') });
     }
   }
 
@@ -76,7 +76,7 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
         <div className="modal-header">
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <h2>{lang === 'fr' ? 'Commande' : 'Order'} #{order.id}</h2>
+              <h2>{lang === 'ar' ? 'الطلب' : 'Commande'} #{order.id}</h2>
               <span
                 className="status-pill-badge"
                 style={{ backgroundColor: currentStatusObj.bg, color: currentStatusObj.color }}
@@ -85,12 +85,12 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
               </span>
             </div>
             <p style={{ fontSize: '12px', color: '#71717a', marginTop: '3px' }}>
-              {lang === 'fr' ? 'Passée le' : 'Placed on'} {formatDate(order.created_at)}
+              {lang === 'ar' ? 'تاريخ الطلب:' : 'Passée le'} {formatDate(order.created_at)}
             </p>
           </div>
           <div style={{ display: 'flex', gap: '8px' }}>
-            <button type="button" className="btn btn-outline-dark" onClick={handlePrint} title={lang === 'fr' ? 'Imprimer le bon' : 'Print packing slip'}>
-              🖨️ {lang === 'fr' ? 'Imprimer le Bon' : 'Print Slip'}
+            <button type="button" className="btn btn-outline-dark" onClick={handlePrint} title={lang === 'ar' ? 'طباعة وصل الطلبية' : 'Imprimer le bon'}>
+              🖨️ {lang === 'ar' ? 'طباعة الوصل' : 'Imprimer le Bon'}
             </button>
             <button type="button" className="modal-close-btn" onClick={onClose} aria-label="Close modal">
               ✕
@@ -103,8 +103,8 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
           {/* Status Quick Updater */}
           <div className="admin-status-control-bar">
             <div className="status-label">
-              <strong>{lang === 'fr' ? 'Statut de la Commande :' : 'Order Status:'}</strong>
-              <span>{lang === 'fr' ? 'Sélectionnez une décision pour cette commande :' : 'Select decision for this customer order:'}</span>
+              <strong>{lang === 'ar' ? 'حالة الطلب:' : 'Statut de la Commande :'}</strong>
+              <span>{lang === 'ar' ? 'حدد إجراءً لهذا الطلب:' : 'Sélectionnez une décision pour cette commande :'}</span>
             </div>
             <div className="status-buttons-row">
               {STATUS_OPTIONS.map((st) => (
@@ -131,10 +131,10 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
           <div className="order-details-grid">
             {/* Left: Customer & Shipping Information */}
             <div className="order-info-card">
-              <h3 className="card-subhead">✦ {lang === 'fr' ? 'Informations Client & Livraison' : 'Customer & Delivery Information'}</h3>
+              <h3 className="card-subhead">✦ {lang === 'ar' ? 'بيانات العميل والتوصيل' : 'Informations Client & Livraison'}</h3>
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Nom & Prénom :' : 'Full Name:'}</span>
+                <span className="info-label">{lang === 'ar' ? 'الاسم واللقب:' : 'Nom & Prénom :'}</span>
                 <span className="info-val strong">{order.full_name}</span>
               </div>
 
@@ -143,16 +143,16 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
                 if (!stats || stats.returnedCount === 0) return null;
                 return (
                   <div className="info-item-row">
-                    <span className="info-label">{lang === 'fr' ? 'Historique Retours :' : 'Return History:'}</span>
+                    <span className="info-label">{lang === 'ar' ? 'سجل المرتجعات:' : 'Historique Retours :'}</span>
                     <span className="info-val" style={{ color: '#b91c1c', fontWeight: '700' }}>
-                      ⚠ {stats.returnedCount} / {stats.totalOrders} {lang === 'fr' ? 'commande(s) retournée(s)' : 'order(s) returned'}
+                      ⚠ {stats.returnedCount} / {stats.totalOrders} {lang === 'ar' ? 'طلبية مرتجعة' : 'commande(s) retournée(s)'}
                     </span>
                   </div>
                 );
               })()}
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Téléphone :' : 'Phone Number:'}</span>
+                <span className="info-label">{lang === 'ar' ? 'رقم الهاتف:' : 'Téléphone :'}</span>
                 <div className="info-val phone-actions">
                   <a href={`tel:${order.phone}`} className="phone-call-btn">
                     📞 {order.phone}
@@ -170,24 +170,24 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
               </div>
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Wilaya :' : 'Wilaya (Province):'}</span>
+                <span className="info-label">{lang === 'ar' ? 'الولاية:' : 'Wilaya :'}</span>
                 <span className="info-val badge-wilaya">{order.wilaya}</span>
               </div>
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Commune / Ville :' : 'Commune / City:'}</span>
+                <span className="info-label">{lang === 'ar' ? 'البلدية / المدينة:' : 'Commune / Ville :'}</span>
                 <span className="info-val strong highlight-commune">
-                  {order.commune || (lang === 'fr' ? '— Non spécifié —' : '— Not specified —')}
+                  {order.commune || (lang === 'ar' ? '— غير محددة —' : '— Non spécifié —')}
                 </span>
               </div>
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Adresse :' : 'Street / Address:'}</span>
+                <span className="info-label">{lang === 'ar' ? 'العنوان:' : 'Adresse :'}</span>
                 <span className="info-val">{order.address || '—'}</span>
               </div>
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Type de Livraison :' : 'Delivery Type:'}</span>
+                <span className="info-label">{lang === 'ar' ? 'نوع التوصيل:' : 'Type de Livraison :'}</span>
                 <span className="info-val">
                   <span className="badge success">
                     {order.delivery_type === 'stopdesk'
@@ -198,15 +198,15 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
               </div>
 
               <div className="info-item-row">
-                <span className="info-label">{lang === 'fr' ? 'Mode de Paiement :' : 'Payment Method:'}</span>
+                <span className="info-label">{lang === 'ar' ? 'طريقة الدفع:' : 'Mode de Paiement :'}</span>
                 <span className="info-val">
-                  <span className="badge success">{lang === 'fr' ? 'Paiement à la Livraison (Espèces)' : 'Cash On Delivery (Paiement à la livraison)'}</span>
+                  <span className="badge success">{lang === 'ar' ? 'الدفع عند الاستلام (نقداً)' : 'Paiement à la Livraison (Espèces)'}</span>
                 </span>
               </div>
 
               <div style={{ marginTop: '14px', paddingTop: '14px', borderTop: '1px dashed #e4e6e4' }}>
                 <div style={{ fontSize: '11.5px', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#71717a', marginBottom: '8px' }}>
-                  {lang === 'fr' ? 'Agence de Livraison & Suivi' : 'Delivery Agency & Tracking'}
+                  {lang === 'ar' ? 'وكالة التوصيل ورقم التتبع' : 'Agence de Livraison & Suivi'}
                 </div>
                 <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
                   <select
@@ -214,7 +214,7 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
                     onChange={(e) => setAgencyDraft(e.target.value)}
                     style={{ flex: '1 1 160px', padding: '8px 10px', borderRadius: '6px', border: '1px solid #d4d4d8', fontSize: '13px' }}
                   >
-                    <option value="">{lang === 'fr' ? '— Aucune agence assignée —' : '— No agency assigned —'}</option>
+                    <option value="">{lang === 'ar' ? '— لم يتم تعيين وكالة —' : '— Aucune agence assignée —'}</option>
                     {(agencies || []).map((a) => (
                       <option key={a.id} value={a.id}>{a.name}</option>
                     ))}
@@ -223,7 +223,7 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
                     type="text"
                     value={tagDraft}
                     onChange={(e) => setTagDraft(e.target.value)}
-                    placeholder={lang === 'fr' ? 'Code de suivi / Référence' : 'Tracking tag / reference'}
+                    placeholder={lang === 'ar' ? 'رقم التتبع / المرجع' : 'Code de suivi / Référence'}
                     style={{ flex: '1 1 160px', padding: '8px 10px', borderRadius: '6px', border: '1px solid #d4d4d8', fontSize: '13px' }}
                   />
                   <button
@@ -232,7 +232,7 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
                     disabled={!logisticsDirty || logisticsStatus.state === 'loading'}
                     onClick={handleSaveLogistics}
                   >
-                    {logisticsStatus.state === 'loading' ? (lang === 'fr' ? 'Enregistrement...' : 'Saving...') : (lang === 'fr' ? 'Enregistrer' : 'Save')}
+                    {logisticsStatus.state === 'loading' ? (lang === 'ar' ? 'جارٍ الحفظ...' : 'Enregistrement...') : (lang === 'ar' ? 'حفظ' : 'Enregistrer')}
                   </button>
                 </div>
                 {logisticsStatus.message && (
@@ -245,25 +245,25 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
 
             {/* Right: Financial Breakdown */}
             <div className="order-info-card financial-card">
-              <h3 className="card-subhead">✦ {lang === 'fr' ? 'Récapitulatif Financier' : 'Financial Summary'}</h3>
+              <h3 className="card-subhead">✦ {lang === 'ar' ? 'الملخص المالي' : 'Récapitulatif Financier'}</h3>
 
               <div className="fin-row">
-                <span>{lang === 'fr' ? 'Articles Commandés :' : 'Total Items Ordered:'}</span>
-                <span>{items.length} {items.length === 1 ? (lang === 'fr' ? 'article' : 'item') : (lang === 'fr' ? 'articles' : 'items')} ({totalUnits} {lang === 'fr' ? 'unités' : 'units'})</span>
+                <span>{lang === 'ar' ? 'المنتجات المطلوبة:' : 'Articles Commandés :'}</span>
+                <span>{items.length} {items.length === 1 ? (lang === 'ar' ? 'منتج' : 'article') : (lang === 'ar' ? 'منتجات' : 'articles')} ({totalUnits} {lang === 'ar' ? 'قطع' : 'unités'})</span>
               </div>
 
               <div className="fin-row">
-                <span>{lang === 'fr' ? 'Sous-total Articles :' : 'Items Subtotal:'}</span>
+                <span>{lang === 'ar' ? 'المجموع الفرعي:' : 'Sous-total Articles :'}</span>
                 <span>{formatDZD(itemsSubtotal || (order.total_price - (order.delivery_fee || 0)))}</span>
               </div>
 
               <div className="fin-row">
-                <span>{lang === 'fr' ? 'Frais de Livraison :' : 'Shipping Fee:'}</span>
-                <span>{order.delivery_fee === 0 ? (lang === 'fr' ? 'GRATUIT' : 'FREE') : formatDZD(order.delivery_fee)}</span>
+                <span>{lang === 'ar' ? 'تكلفة التوصيل:' : 'Frais de Livraison :'}</span>
+                <span>{order.delivery_fee === 0 ? (lang === 'ar' ? 'مجاني' : 'GRATUIT') : formatDZD(order.delivery_fee)}</span>
               </div>
 
               <div className="fin-row grand-total">
-                <span>{lang === 'fr' ? 'Total à Encaisser (COD) :' : 'Total to Collect (COD):'}</span>
+                <span>{lang === 'ar' ? 'المجموع الكلي المطلوب (COD):' : 'Total à Encaisser (COD) :'}</span>
                 <span className="price-amount">{formatDZD(order.total_price)}</span>
               </div>
             </div>
@@ -272,17 +272,17 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
           {/* Full Itemized Products List */}
           <div className="order-items-detail-section">
             <h3 className="card-subhead">
-              ✦ {lang === 'fr' ? 'Détail des Articles' : 'Ordered Items'} ({items.length > 0 ? items.length : 1} {lang === 'fr' ? 'produits' : 'products'} • {totalUnits > 0 ? totalUnits : 1} {lang === 'fr' ? 'unités au total' : 'total units'})
+              ✦ {lang === 'ar' ? 'تفاصيل المنتجات' : 'Détail des Articles'} ({items.length > 0 ? items.length : 1} {lang === 'ar' ? 'منتجات' : 'produits'} • {totalUnits > 0 ? totalUnits : 1} {lang === 'ar' ? 'قطع إجمالاً' : 'unités au total'})
             </h3>
 
             <table className="order-items-table">
               <thead>
                 <tr>
-                  <th style={{ width: '56px' }}>{lang === 'fr' ? 'Photo' : 'Photo'}</th>
-                  <th>{lang === 'fr' ? 'Nom du Produit & Rayon' : 'Product Name & Category'}</th>
-                  <th style={{ textAlign: 'center' }}>{lang === 'fr' ? 'Quantité' : 'Quantity'}</th>
-                  <th style={{ textAlign: 'right' }}>{lang === 'fr' ? 'Prix Unitaire' : 'Unit Price'}</th>
-                  <th style={{ textAlign: 'right' }}>{lang === 'fr' ? 'Total Ligne' : 'Line Total'}</th>
+                  <th style={{ width: '56px' }}>{lang === 'ar' ? 'الصورة' : 'Photo'}</th>
+                  <th>{lang === 'ar' ? 'اسم المنتج والقسم' : 'Nom du Produit & Rayon'}</th>
+                  <th style={{ textAlign: 'center' }}>{lang === 'ar' ? 'الكمية' : 'Quantité'}</th>
+                  <th style={{ textAlign: 'right' }}>{lang === 'ar' ? 'سعر الوحدة' : 'Prix Unitaire'}</th>
+                  <th style={{ textAlign: 'right' }}>{lang === 'ar' ? 'المجموع' : 'Total Ligne'}</th>
                 </tr>
               </thead>
               <tbody>
@@ -337,17 +337,17 @@ export default function AdminOrderDetailModal({ order, onClose, onUpdateStatus, 
             type="button"
             className="icon-btn danger"
             onClick={() => {
-              const confirmText = lang === 'fr' ? `Supprimer la commande #${order.id} ?` : `Delete order #${order.id}?`;
+              const confirmText = lang === 'ar' ? `حذف الطلب #${order.id}؟` : `Supprimer la commande #${order.id} ?`;
               if (window.confirm(confirmText)) {
                 onDelete(order.id);
                 onClose();
               }
             }}
           >
-            🗑️ {lang === 'fr' ? 'Supprimer la Commande' : 'Delete Order'}
+            🗑️ {lang === 'ar' ? 'حذف الطلب' : 'Supprimer la Commande'}
           </button>
           <button type="button" className="btn btn-black" onClick={onClose}>
-            {lang === 'fr' ? 'Fermer' : 'Close'}
+            {lang === 'ar' ? 'إغلاق' : 'Fermer'}
           </button>
         </div>
       </div>

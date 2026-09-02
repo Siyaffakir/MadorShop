@@ -3,9 +3,9 @@ import { useLanguage } from '../context/LanguageContext';
 export default function FloatingWhatsApp() {
   const { lang } = useLanguage();
   const PHONE_RAW = '213561662874';
-  const defaultMessage = lang === 'fr' 
-    ? 'Bonjour Mador Shopping, je souhaite des renseignements sur vos produits.'
-    : 'Hello Mador Shopping, I would like more information about your products.';
+  const defaultMessage = lang === 'ar'
+    ? 'مرحباً مادور شوبينغ، أود الاستفسار عن منتجاتكم.'
+    : 'Bonjour Mador Shopping, je souhaite des renseignements sur vos produits.';
 
   const whatsappUrl = `https://wa.me/${PHONE_RAW}?text=${encodeURIComponent(defaultMessage)}`;
 
@@ -15,7 +15,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       className="floating-whatsapp-btn"
-      aria-label="Contactez-nous sur WhatsApp"
+      aria-label={lang === 'ar' ? 'تواصل معنا عبر واتساب' : 'Contactez-nous sur WhatsApp'}
     >
       <span className="floating-whatsapp-pulse" />
       <span className="floating-whatsapp-icon">
@@ -24,7 +24,7 @@ export default function FloatingWhatsApp() {
         </svg>
       </span>
       <span className="floating-whatsapp-text">
-        {lang === 'fr' ? 'WhatsApp Direct' : 'Chat WhatsApp'}
+        {lang === 'ar' ? 'واتساب مباشر' : 'WhatsApp Direct'}
       </span>
       <span className="floating-whatsapp-online-dot" />
     </a>
